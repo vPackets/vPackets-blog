@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AWS on My Cloud Networking, Automation and Triathlon Blog</title>
+    <link>https://vpackets.github.io/vPackets-blog/aws/</link>
+    <description>Recent content in AWS on My Cloud Networking, Automation and Triathlon Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://vpackets.github.io/vPackets-blog/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Create a VPC - Manual</title>
+      <link>https://vpackets.github.io/vPackets-blog/aws/manual-vpc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://vpackets.github.io/vPackets-blog/aws/manual-vpc/</guid>
+      <description>In this blogpost we are going to create a Virtual Private Cloud in Amazon Web Services that will host all the shared services generally deployed by an IT team. Since networking is fundamental to allow communication between servers and computers, every cloud service providers use a dedicated network construct. AWS and Google Cloud call it a VPC, while Azure for example calls it a VNET (virtual network).
+Network constructs are different between cloud providers.</description>
+    </item>
+  </channel>
+</rss>
