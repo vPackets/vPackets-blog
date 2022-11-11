@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://vpackets.github.io/vPackets-blog/aws/</loc>
+    <loc>http://blog.vpackets.net/aws/</loc>
   </url>
   <url>
-    <loc>https://vpackets.github.io/vPackets-blog/aws/manual-vpc/</loc>
+    <loc>http://blog.vpackets.net/aws/manual-vpc/</loc>
   </url>
   <url>
-    <loc>https://vpackets.github.io/vPackets-blog/categories/</loc>
+    <loc>http://blog.vpackets.net/categories/</loc>
   </url>
   <url>
-    <loc>https://vpackets.github.io/vPackets-blog/</loc>
+    <loc>http://blog.vpackets.net/</loc>
   </url>
   <url>
-    <loc>https://vpackets.github.io/vPackets-blog/tags/</loc>
+    <loc>http://blog.vpackets.net/tags/</loc>
   </url>
 </urlset>

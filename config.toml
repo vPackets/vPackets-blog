@@ -1,4 +1,4 @@
-baseURL = 'https://vpackets.github.io/vPackets-blog'
+baseURL = 'http://blog.vpackets.net/'
 languageCode = 'en-us'
 title = 'My Cloud Networking, Automation and Triathlon Blog'
 publishDir = "docs"
