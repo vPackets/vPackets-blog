@@ -7,9 +7,7 @@
     <meta name="generator" content="Relearn 5.3.3+tip">
     <meta name="description" content="My own personnal blog regarding technology and sports">
     <meta name="author" content="Nicolas Michel">
-    <title>My Cloud Networking, Automation and Triathlon Blog</title>
-    <link href="/index.xml" rel="alternate" type="application/rss+xml" title="My Cloud Networking, Automation and Triathlon Blog">
-    <link href="/index.json" rel="alternate" type="application/json" title="My Cloud Networking, Automation and Triathlon Blog">
+    <title> Manual Process - My Cloud Networking, Automation and Triathlon Blog</title>
     <link href="/images/favicon.png?1668243045" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
     <link href="/css/fontawesome-all.min.css?1668243045" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1668243045" rel="stylesheet"></noscript>
@@ -41,7 +39,7 @@
     </script>
     <script src="/js/jquery.min.js?1668243045" defer></script>
   </head>
-  <body class="mobile-support html" data-url="/">
+  <body class="mobile-support default" data-url="/aviatrix/controller/manual-deployment/">
     <div id="body" class="default-animation">
       <div id="sidebar-overlay"></div>
       <div id="toc-overlay"></div>
@@ -52,23 +50,56 @@
               <a href="#" id="sidebar-toggle" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
             </span>
             <span class="links">
-              My Cloud Networking, Automation and Triathlon Blog
+               Manual Process
             </span>
           </div>
         </div>
       </nav>
-      <main id="body-inner" class="highlightable home" tabindex="-1">
+      <main id="body-inner" class="highlightable default" tabindex="-1">
         <div class="flex-block-wrapper">
           <div id="head-tags">
           </div>
-          <article class="home deprecated">
+          <article class="default">
+<h1> Manual Process</h1>
 
-<h1 id="create-this-page">Create this Page</h1>
-<p>You need to create a file for this page. You can either</p>
-<ul>
-<li>create an _index.md, index.md or otherly named markdown file (depending on Hugo&rsquo;s bundle type) in <em>content</em> folder and fill it with Markdown content</li>
-<li>create an <em>index.html</em> file in the <!-- raw HTML omitted -->static<!-- raw HTML omitted --> folder and fill the file with HTML content</li>
-</ul>
+<p>In every modern SDDC solution, the first step is to deploy a controller. The aviatrix controller can be deployed in any Cloud service provider but this example will focus on deploying the Aviatrix controller on AWS. You have multiple ways to deploy an Aviatrix controller, you could either deploy it manually (the sole purpose of this post) or automate it using <a href="https://docs.aviatrix.com/StartUpGuides/aws_getting_started_guide.html">AWS cloudformation</a> or Terraform (more on this one in a later post)</p>
+<p>It is usually recommended to install the controller in a VPC that is dedicated to general infrastructure resources as described previous or here</p>
+<p>Once you have the VPC and all its mandatory network constructs needed to provide internet connectivity, you can deploy a VPC</p>
+<p>If you remember what we did in the previous article we will just install the Aviatrix Controller into that VPC.</p>
+<p>The very simple topology will look like this <img src="/images/aviatrix/controller/manual-deployment/Fig1-avxcontroller.png" alt="AVX Controller">.</p>
+<p>We will have install the custom <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html">AMI</a> for the Aviatrix Controller in the VPC and we want to have an <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">elastic IP address</a> assigned to this EC2 instance. That way, if you need to reboot or stop the controller at any point, the IP address assigned will stay the same and you will not have to change your DNS record.</p>
+<p>The first step is to deploy the Aviatrix EC2 instance using the AMI marketplace in the EC2 console as show below:
+<img src="/images/aviatrix/controller/manual-deployment/Fig2-EC2launch.png" alt="AVX ControllerEC2">.</p>
+<p>Once you are in the AMI marketplace, you can search for a variety of images that are available for you. Just type &ldquo;Aviatrix&rdquo; and you will have the choise to deploy different solutions (controller or copilot.)
+As I have my own license already, I am choosing the &ldquo;Aviatrix Secure Networking Platform - BYOL&rdquo; option. (Do not hesitate to <a href="https://aviatrix.com/#live-chat">reach to Aviatrix</a> to understand the different licensing options).</p>
+<p><img src="/images/aviatrix/controller/manual-deployment/Fig3-AVXami.png" alt="AVX ControllerAMI">.</p>
+<p>Once you select the right option for you, you will have to configure your EC2 instance.
+I gave it a name and an instance type (t3.large) and a previously created key-pair.</p>
+<p><img src="/images/aviatrix/controller/manual-deployment/Fig4-EC2Config01.png" alt="AVX ControllerEC2Config">.</p>
+<p>The networking config is critical as it will obviously provide the connectivity to the internet and other VPCs.
+You need to select the VPC previously created and make sure to select a public subnet as well.
+Make sure to not &ldquo;auto-assign a public IP&rdquo; to this EC2 instance, we will assign an elastic IP one. If you assign one now, the IP address will change if you stop the controller.
+Also, verify that the right security group is selected, it should authorize inbound SSH and TLS traffic from your management IP address (Home or on premise Data center for example).</p>
+<p><img src="/images/aviatrix/controller/manual-deployment/Fig5-EC2Config02.png" alt="AVX ControllerEC2ConfigNetwork">.</p>
+<p>Once we are done with the networking config, we can launch the controller and then assign an Elastic IP address:</p>
+<p><img src="/images/aviatrix/controller/manual-deployment/Fig6-ElasticIP.png" alt="AVX ControllerEC2EIP">.</p>
+<p>The process to assign an Elastic IP is very straightfoward, you just have to claim an IP address that you assign to the right VPC and configure that IP address to the EC2 instance of your choice (The AVX controller in our case).</p>
+<p><img src="/images/aviatrix/controller/manual-deployment/Fig7-ElasticIPassigned02.png" alt="AVX ControllerEC2EIP">.</p>
+<p>Once you have assigned the IP address, you should be able to access it using HTTPS (Make sure to login using the following credential, the username is &ldquo;admin&rdquo; and the password is the private IP address assigned by AWS within your VPC/Subnet):</p>
+<p><img src="/images/aviatrix/controller/manual-deployment/Fig8-test.png" alt="AVX Controller login">.</p>
+<p>Then, the controller will ask for your email to receive the initial notification and it will upgrade itself to the latest version.</p>
+<p><img src="/images/aviatrix/controller/manual-deployment/Fig9-email.png" alt="AVX Controller Email">.
+<img src="/images/aviatrix/controller/manual-deployment/Fig11-upgrade.png" alt="AVX Controller upgrade">.</p>
+<p>Now that your Aviatrix controller is deployed, you are almost ready to fly. You just need to make sure that your AWS (or other CSP) account is configured into the Aviatrix controller to orchestrate your CSP native constructs and deploy the Aviatrix gateways.</p>
+<p><img src="/images/aviatrix/controller/manual-deployment/Fig12-welcome.png" alt="AVX Controller Welcome">.</p>
+<p>Click on the AWS icon and fill the fields with your CSP account information. you can follow this <a href="https://docs.aviatrix.com/StartUpGuides/aws_getting_started_guide.html">documentation</a> or even better this entire <a href="https://docs.aviatrix.com/HowTos/onboarding_faq.html">chapter</a></p>
+<p><img src="/images/aviatrix/controller/manual-deployment/Fig13-AWSaccount.png" alt="AVX Controller AWS Setup">.</p>
+<p>It is possible that your Aviatrix controller EC2 instance is missing some IAM roles at the begining ! Make sure to fix this using this <a href="https://docs.aviatrix.com/HowTos/onboarding_faq.html#why-do-i-need-an-aws-account-credential">documentation</a> or you will end up getting this error message:</p>
+<p><img src="/images/aviatrix/controller/manual-deployment/Fig13-IAMrole.png" alt="AVX Controller AWS Setup">.</p>
+<p>Modify the IAM role into your EC2 instance:</p>
+<p><img src="/images/aviatrix/controller/manual-deployment/Fig14-IAMroleassigned.png" alt="AVX Controller AWS Setup">.</p>
+<p><img src="/images/aviatrix/controller/manual-deployment/Fig15-IAMroleassignedec2.png" alt="AVX Controller AWS Setup">.</p>
+<p>Now you should be able to perform your first solo flight using the Aviatrix solution on AWS. Enjoy and have a relaxing flight :) .</p>
 
             <footer class="footline">
             </footer>
@@ -157,9 +188,9 @@
       </div>
       <div id="content-wrapper" class="highlightable">
         <ul class="topics">
-          <li data-nav-id="/aviatrix/" class="dd-item alwaysopen"><a href="/aviatrix/">Aviatrix</a><ul id="subsections-e9c1f91d28a54160f285f33fe2da5aa4">
-          <li data-nav-id="/aviatrix/controller/" class="dd-item alwaysopen"><a href="/aviatrix/controller/">Controller</a><ul id="subsections-e93ffb5cc47e3ca6f70f1291165bddc0">
-          <li data-nav-id="/aviatrix/controller/manual-deployment/" class="dd-item"><a href="/aviatrix/controller/manual-deployment/"> Manual Process</a></li></ul></li></ul></li>
+          <li data-nav-id="/aviatrix/" class="dd-item parent alwaysopen"><a href="/aviatrix/">Aviatrix</a><ul id="subsections-e9c1f91d28a54160f285f33fe2da5aa4">
+          <li data-nav-id="/aviatrix/controller/" class="dd-item parent alwaysopen"><a href="/aviatrix/controller/">Controller</a><ul id="subsections-e93ffb5cc47e3ca6f70f1291165bddc0">
+          <li data-nav-id="/aviatrix/controller/manual-deployment/" class="dd-item active"><a href="/aviatrix/controller/manual-deployment/"> Manual Process</a></li></ul></li></ul></li>
           <li data-nav-id="/aws/" class="dd-item alwaysopen"><a href="/aws/">AWS</a><ul id="subsections-db8ac1d891f3a128ac6dc30cdc5237df">
           <li data-nav-id="/aws/vpc/" class="dd-item alwaysopen"><a href="/aws/vpc/">VPC</a><ul id="subsections-eedb28a2d43a03290b8827bc6e7cbe62">
           <li data-nav-id="/aws/vpc/manual-vpc/" class="dd-item"><a href="/aws/vpc/manual-vpc/">Create a VPC - Manual</a></li>

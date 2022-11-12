@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Aviatrix on My Cloud Networking, Automation and Triathlon Blog</title>
+    <link>http://blog.vpackets.net/aviatrix/</link>
+    <description>Recent content in Aviatrix on My Cloud Networking, Automation and Triathlon Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Aug 2022 13:57:51 -0500</lastBuildDate><atom:link href="http://blog.vpackets.net/aviatrix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Controller</title>
+      <link>http://blog.vpackets.net/aviatrix/controller/</link>
+      <pubDate>Tue, 23 Aug 2022 13:57:51 -0500</pubDate>
+      <guid>http://blog.vpackets.net/aviatrix/controller/</guid>
+      <description>Lorem Ipsum.</description>
+    </item>
+  </channel>
+</rss>

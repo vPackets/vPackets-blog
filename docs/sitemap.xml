@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://blog.vpackets.net/aws/</loc>
-    <lastmod>2022-08-23T14:25:17-05:00</lastmod>
-  </url>
-  <url>
     <loc>http://blog.vpackets.net/aws/vpc/</loc>
     <lastmod>2022-08-23T14:25:17-05:00</lastmod>
   </url>
   <url>
+    <loc>http://blog.vpackets.net/aviatrix/</loc>
+    <lastmod>2022-08-23T13:57:51-05:00</lastmod>
+  </url>
+  <url>
+    <loc>http://blog.vpackets.net/aviatrix/controller/</loc>
+    <lastmod>2022-08-23T13:57:51-05:00</lastmod>
+  </url>
+  <url>
     <loc>http://blog.vpackets.net/aws/vpc/manual-vpc/</loc>
+  </url>
+  <url>
+    <loc>http://blog.vpackets.net/aws/</loc>
+    <lastmod>2022-08-23T14:25:17-05:00</lastmod>
   </url>
   <url>
     <loc>http://blog.vpackets.net/aws/vpc/automation-vpc/</loc>
@@ -18,6 +26,10 @@
   <url>
     <loc>http://blog.vpackets.net/</loc>
     <lastmod>2022-08-23T14:25:17-05:00</lastmod>
+  </url>
+  <url>
+    <loc>http://blog.vpackets.net/aviatrix/controller/manual-deployment/</loc>
+    <lastmod>2022-08-23T13:57:51-05:00</lastmod>
   </url>
   <url>
     <loc>http://blog.vpackets.net/categories/</loc>
