@@ -1,7 +1,8 @@
 +++
 archetype = "chapter"
-title = "AWS"
+title = " "
 weight = 2
+pre = "<b>AWS</b>"
 +++
 
 TEST TEST
