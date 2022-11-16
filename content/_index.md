@@ -36,8 +36,8 @@ I currently hold the following certifications:
 - CCIE #29410 Routing & Switching
 - CCIE #29410 Data Center
 
-![CCIE RS](/images/intro/ccie-rs.jpg?classes=inline) 
-![CCIE DC](/images/intro/ccie-dc.jpg?classes=inline) 
+![CCIE RS](/images/intro/ccie-rs.jpg?classes=inline,center) 
+![CCIE DC](/images/intro/ccie-dc.jpg?classes=inline,center) 
 
 - Aviatrix Certified Engineer - Associate
 - Aviatrix Certified Engineer - Professional
