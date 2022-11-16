@@ -94,4 +94,5 @@ home = [ "HTML", "RSS", "JSON"]
     guessSyntax = false
 
     # choose a color theme or create your own
-    style = "monokai"
+    #style = "monokai"
+    style = "dracula"
