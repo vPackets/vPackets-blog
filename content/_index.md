@@ -39,9 +39,6 @@ I currently hold the following certifications:
 ![CCIE RS](/images/intro/ccie-rs.jpg?classes=inline) 
 ![CCIE DC](/images/intro/ccie-dc.jpg?classes=inline) 
 
-![Spidertocat](https://octodex.github.com/images/spidertocat.png?classes=inline)
-![DrOctocat](https://octodex.github.com/images/droctocat.png?classes=inline)
-
 - Aviatrix Certified Engineer - Associate
 - Aviatrix Certified Engineer - Professional
 
@@ -64,11 +61,7 @@ I am getting certified in cloud technologies:
 
 # Sports
 
-I have multiple races scheduled for 2023:
-
-![IM](https://upload.wikimedia.org/wikipedia/commons/6/61/Ironman_logo.gif)
-
-
+I have multiple races scheduled for 2023: ![IM](https://upload.wikimedia.org/wikipedia/commons/6/61/Ironman_logo.gif?classes=inline)
 
 - [Ironman Texas - 140.6](https://www.ironman.com/im-texas).
 - [Ironman StGeorge - 70.3](https://www.ironman.com/im703-st-george-connect).
