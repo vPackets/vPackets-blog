@@ -37,9 +37,10 @@ I currently hold the following certifications:
 - CCIE #29410 Data Center
 
 ![CCIE RS](/images/intro/ccie-rs.jpg?classes=inline) 
-
 ![CCIE DC](/images/intro/ccie-dc.jpg?classes=inline) 
 
+![Spidertocat](https://octodex.github.com/images/spidertocat.png?classes=inline)
+![DrOctocat](https://octodex.github.com/images/droctocat.png?classes=inline)
 
 - Aviatrix Certified Engineer - Associate
 - Aviatrix Certified Engineer - Professional
