@@ -15,6 +15,9 @@ I have 3 wonderful kids and we live with my wife in Austin, TX. I am an ex natio
 
 # What do I do and who do I work for?
 
+
+![Me](/images/intro/nicolas-head-shot.png)
+
 I am a principal product manager at Aviatrix. In my current role, I have the satisfaction to provide the following:
 
 - Understand new use cases to be addressed in the Aviatrix platform by developing deep technical relationships with the Aviatrix customers and field teams, and by maintaining a broad understanding of the cloud networking market.
@@ -30,18 +33,20 @@ I am a principal product manager at Aviatrix. In my current role, I have the sat
 
 I currently hold the following certifications:
 
-CCIE #29410 Routing & Switching and Data Center . CCNP Voice
+- CCIE #29410 Routing & Switching
+- CCIE #29410 Data Center
 
-![CCIE DC](https://images.credly.com/size/340x340/images/f352403a-abe2-45a4-ab5d-33ff92d35ffb/cisco_ccie_datacenter.png) \
+![CCIE RS](/images/intro/ccie-rs.jpg) \
 
-![CCIE RS](https://vpackets.net/wp-content/uploads/2014/07/CCIE_RS_Logo-150x150.jpg)
+![CCIE DC](/images/intro/ccie-dc.jpg) \
 
 
-Aviatrix Certified Engineer Associate and Professional
+- Aviatrix Certified Engineer - Associate
+- Aviatrix Certified Engineer - Professional
 
-![ACE Associate](https://aviatrix.com/wp-content/uploads/2022/02/ACE-Associate.png)
+![ACE Associate](/images/intro/ace-associated.png)
 
-![ACE Professional](https://aviatrix.com/wp-content/uploads/2022/02/ACE-Professional-e1645804410183.png)
+![ACE Professionnal](/images/intro/ace-professional.png)
 
 
 When I was part of the French Air Force, I have received the bronze national defence medal. It was created by Charles Hernu, Minister of Defence and established by decree on April 21, 1982. It rewards particularly honourable service rendered by military personnel for their participation in operational activities. 
