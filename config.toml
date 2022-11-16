@@ -86,3 +86,12 @@ home = [ "HTML", "RSS", "JSON"]
 
 
 
+[markup]
+  [markup.highlight]
+    # if set to `guessSyntax = true`, there will be no unstyled code even if no language
+    # was given BUT mermaid code fences will not work anymore! So this is a mandatory
+    # setting for your site
+    guessSyntax = false
+
+    # choose a color theme or create your own
+    style = "monokai"
