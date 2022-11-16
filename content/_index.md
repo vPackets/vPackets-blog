@@ -65,6 +65,10 @@ I am getting certified in cloud technologies:
 
 I have multiple races scheduled for 2023:
 
+![IM](https://upload.wikimedia.org/wikipedia/commons/6/61/Ironman_logo.gif)
+
+
+
 - [Ironman Texas - 140.6](https://www.ironman.com/im-texas).
 - [Ironman StGeorge - 70.3](https://www.ironman.com/im703-st-george-connect).
 - [Ironman Switzerland - 140.6](https://www.ironman.com/im-switzerland).
