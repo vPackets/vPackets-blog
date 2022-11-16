@@ -5,4 +5,4 @@ weight = 1
 +++
 
 
-[01 - Controller Manual Deployment](https://blog.vpackets.net/aviatrix/controller/manual-deployment/).
+[01 - Deploy a Controller - Manual](https://blog.vpackets.net/aviatrix/controller/manual-deployment/).

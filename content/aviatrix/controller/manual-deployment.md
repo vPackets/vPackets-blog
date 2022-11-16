@@ -1,5 +1,5 @@
 ---
-title: " Manual Process"
+title: " Deploy a Controller - Manual"
 date: 2022-08-23T13:57:51-05:00
 draft: false
 ---
