@@ -38,7 +38,7 @@ I currently hold the following certifications:
 
 ![CCIE RS](/images/intro/ccie-rs.jpg?classes=inline) 
 
-![CCIE DC](/images/intro/ccie-dc.jpg) 
+![CCIE DC](/images/intro/ccie-dc.jpg?classes=inline) 
 
 
 - Aviatrix Certified Engineer - Associate
