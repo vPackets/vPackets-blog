@@ -5,8 +5,6 @@ weight = 2
 pre = "<b>AWS</b>"
 +++
 
-### Cloud Service Provider
-
 # Amazon Web Services
 
 This section will contain all the content specifically created for the Amazon Web Service Cloud provider.
