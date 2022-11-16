@@ -36,7 +36,7 @@ I currently hold the following certifications:
 - CCIE #29410 Routing & Switching
 - CCIE #29410 Data Center
 
-![CCIE RS](/images/intro/ccie-rs.jpg) 
+![CCIE RS](/images/intro/ccie-rs.jpg?classes=inline) 
 
 ![CCIE DC](/images/intro/ccie-dc.jpg) 
 
