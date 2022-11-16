@@ -8,11 +8,11 @@
     <language>en-us</language>
     <lastBuildDate>Tue, 23 Aug 2022 13:57:51 -0500</lastBuildDate><atom:link href="http://blog.vpackets.net/aviatrix/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Controller</title>
+      <title>Aviatrix Controller Installation</title>
       <link>http://blog.vpackets.net/aviatrix/controller/</link>
       <pubDate>Tue, 23 Aug 2022 13:57:51 -0500</pubDate>
       <guid>http://blog.vpackets.net/aviatrix/controller/</guid>
-      <description>Lorem Ipsum.</description>
+      <description>Aviatrix - Controller Management and Control plane for the Aviatrix Solution 01 - Controller Manual Deployment.</description>
     </item>
   </channel>
 </rss>
