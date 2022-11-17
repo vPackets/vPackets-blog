@@ -1,6 +1,6 @@
 +++
 archetype = "chapter"
-title = "Aviatrix Controller Installation"
+title = "Controller"
 description = "You need management and control plane first right ? let's have a look"
 weight = 1
 +++
