@@ -12,7 +12,8 @@
       <link>http://blog.vpackets.net/aws/vpc/</link>
       <pubDate>Tue, 23 Aug 2022 14:25:17 -0500</pubDate>
       <guid>http://blog.vpackets.net/aws/vpc/</guid>
-      <description>01 - VPC Manual Deployment. 02 - VPC Automatic Deployment.</description>
+      <description>Table of Contents Create a VPC - ManualWalkthrough of a VPC creation in AWS
+Create a VPC - TerraformAutomate your VPC deployment with Infrastructure as code !</description>
     </item>
   </channel>
 </rss>

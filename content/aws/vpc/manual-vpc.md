@@ -1,5 +1,6 @@
 +++
 title = "Create a VPC - Manual"
+description = "Walkthrough of a VPC creation in AWS"
 weight = 1
 +++
 

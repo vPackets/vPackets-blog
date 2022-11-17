@@ -1,8 +1,10 @@
 +++
 archetype = "chapter"
 title = "VPC"
+description = " Everything related to the network contruscts in AWS"
 weight = 1
 +++
 
-[01 - VPC Manual Deployment](https://blog.vpackets.net/aws/vpc/manual-vpc/). \
-[02 - VPC Automatic Deployment](https://blog.vpackets.net/aws/vpc/automation-vpc/).
+## Table of Contents
+
+{{% children description="true" depth="4" %}}

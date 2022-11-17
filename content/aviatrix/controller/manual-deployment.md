@@ -1,5 +1,6 @@
 ---
 title: " Deploy a Controller - Manual"
+description: " Walkthrough of the Aviatrix Controller installation in AWS"
 date: 2022-08-23T13:57:51-05:00
 draft: false
 ---

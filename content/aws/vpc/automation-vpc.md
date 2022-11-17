@@ -1,5 +1,6 @@
 ---
 title: "Create a VPC - Terraform"
+description: "Automate your VPC deployment with Infrastructure as code !"
 date: 2022-08-23T14:25:17-05:00
 draft: false
 ---
