@@ -7,4 +7,4 @@ weight = 1
 
 ## Table of Contents
 
-{{% children depth="4" %}}
+{{% children description="true" depth="4" %}}

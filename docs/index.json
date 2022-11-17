@@ -14,7 +14,7 @@
     "uri": "/aviatrix/"
   },
   {
-    "content": "Table of Contents Deploy a Controller - Manual ",
+    "content": "Table of Contents Deploy a Controller - Manual Walkthrough of the Aviatrix Controller installation in AWS\n",
     "description": "You need management and control plane first right ? let's have a look",
     "tags": null,
     "title": "Aviatrix Controller Installation",
