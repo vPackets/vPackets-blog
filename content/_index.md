@@ -42,9 +42,9 @@ I currently hold the following certifications:
 - Aviatrix Certified Engineer - Associate
 - Aviatrix Certified Engineer - Professional
 
-![ACE Associate](/images/intro/ace-associate.png)
+![ACE Associate](/images/intro/ace-associate.png?classes=inline,center)
 
-![ACE Professionnal](/images/intro/ace-pro.png)
+![ACE Professionnal](/images/intro/ace-pro.png?classes=inline,center)
 
 
 When I was part of the French Air Force, I have received the bronze national defence medal. It was created by Charles Hernu, Minister of Defence and established by decree on April 21, 1982. It rewards particularly honourable service rendered by military personnel for their participation in operational activities. 
