@@ -485,3 +485,5 @@ aws ec2 modify-instance-attribute --instance-id i-08e9bfdfa2e1d21bf --groups {Us
 ```
 
 My controller is now fully reachable from my the subnets configured in my security group.
+
+![AVX-Controller](/images/aviatrix/controller/automatic-deployment/Fig1-controller-dashboard.png)

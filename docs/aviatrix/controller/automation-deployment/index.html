@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.106.0">
+    <meta name="generator" content="Relearn 5.3.3+tip">
+    <meta name="description" content=" Use Terraform to deploy an Aviatrix Controller in AWS">
+    <meta name="author" content="Nicolas Michel">
+    <title> Deploy a Controller - Terraform - My Cloud Networking, Automation and Triathlon Blog</title>
+    <link href="/images/favicon.png?1669101365" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1669101365" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1669101365" rel="stylesheet"></noscript>
+    <link href="/css/featherlight.min.css?1669101365" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/featherlight.min.css?1669101365" rel="stylesheet"></noscript>
+    <link href="/css/auto-complete.css?1669101365" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1669101365" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1669101365" rel="stylesheet">
+    <link href="/css/nucleus.css?1669101365" rel="stylesheet">
+    <link href="/css/fonts.css?1669101365" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1669101365" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1669101365" rel="stylesheet">
+    <link href="/css/theme-blue.css?1669101365" rel="stylesheet" id="variant-style">
+    <link href="/css/ie.css?1669101365" rel="stylesheet">
+    <link href="/css/variant.css?1669101365" rel="stylesheet">
+    <link href="/css/print.css?1669101365" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1669101365"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      var index_url="/index.json";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      // some further base stuff
+      var baseUriFull='http:\/\/blog.vpackets.net/';
+      window.variants && variants.init( [ 'blue' ] );
+    </script>
+    <script src="/js/jquery.min.js?1669101365" defer></script>
+  </head>
+  <body class="mobile-support default" data-url="/aviatrix/controller/automation-deployment/">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span class="links">
+               Deploy a Controller - Terraform
+            </span>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+          </div>
+          <article class="default">
+<h1> Deploy a Controller - Terraform</h1>
+
+<p>Now that we have seen the steps to deploy an Aviatrix controller in AWS, we are going to see how easy it when we use <a href="https://en.wikipedia.org/wiki/Infrastructure_as_code">Infrastructure as Code</a></p>
+<p>The following <a href="https://registry.terraform.io/namespaces/AviatrixSystems">Terraform Registry</a> shows the different registries and examples regarding the controller deployment in <a href="https://aws.amazon.com/">AWS</a>, <a href="https://azure.microsoft.com/en-us/get-started/azure-portal">Azure</a>, <a href="https://cloud.google.com/">GCP</a> and <a href="https://www.oracle.com/cloud/">OCI</a>. In my example I am using AWS and will demonstrate how easy and convenient it is.</p>
+<p>We will use the following <a href="https://registry.terraform.io/modules/AviatrixSystems/aws-controller/aviatrix/latest">AVX controller in AWS registry</a>.</p>
+<p>My IAM roles have already been created previously and must be configured on the Aviatrix Controller EC2 instance.</p>
+<p>The <a href="https://pypi.org/project/requests/">request</a> library is needed to send the accurate HTTP requests for our deployment.</p>
+<p>The documentation states that only 5 variables are needed to deploy the controller but I will use other parameters to deploy my controller.</p>
+<p>It is important to fathom the fact that a security group and external IP address will be automatically assigned to the controller EC2 instance. You can modify that easily using the AWS CLI as we will demonstrate:</p>
+<p>Here is my main.tf file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>module <span style="color:#f1fa8c">&#34;aviatrix_controller_aws&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">source</span>               <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;AviatrixSystems/aws-controller/aviatrix&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">create_iam_roles</span>     <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">false</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">incoming_ssl_cidrs</span>   <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;{use your own IP here}&#34;</span><span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">admin_password</span>       <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;{Use your own password here}&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">admin_email</span>          <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;{use your email here}&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">access_account_name</span>  <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;{use your account name/ID}&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">access_account_email</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;{use your email here}&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">customer_license_id</span>  <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;{use your BYOL license here}&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">type</span>                 <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;BYOL&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">availability_zone</span>    <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;us-east-1a&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">use_existing_vpc</span>     <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">vpc_id</span>               <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;{use your VPC ID here}&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">subnet_cidr</span>          <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;10.0.10.0/28&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">subnet_id</span>            <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;{use your Subnet ID here}&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">use_existing_keypair</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">key_pair_name</span>        <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;vPackets-AVX&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">termination_protection</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">instance_type</span>        <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;t3.large&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">controller_name</span>      <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;AVX-Controller&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>output <span style="color:#f1fa8c">&#34;public_ip&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">value</span> <span style="color:#ff79c6">=</span> module.aviatrix_controller_aws.public_ip
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>output <span style="color:#f1fa8c">&#34;private_ip&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">value</span> <span style="color:#ff79c6">=</span> module.aviatrix_controller_aws.private_ip
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><p>A terraform plan will allow us to assess the current state in AWS and report what objects will be created:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>nmichel@vPackets.local:/Users/nmichel/code/AVIATRIX/AVX-IAC/controller $ terraform plan                                                                              <span style="color:#ff79c6">[</span>11/22/22 - 0:36:01<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.http.avx_iam_id: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.http.avx_iam_id: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>https://s3-us-west-2.amazonaws.com/aviatrix-download/AMI_ID/ami_id.json<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_region.current: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.data.aws_caller_identity.current: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_availability_zones.all: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_vpc.controller_vpc: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_region.current: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>us-east-1<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_availability_zones.all: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>us-east-1<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1b&#34;</span><span style="color:#ff79c6">]</span>: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1f&#34;</span><span style="color:#ff79c6">]</span>: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1a&#34;</span><span style="color:#ff79c6">]</span>: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1c&#34;</span><span style="color:#ff79c6">]</span>: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1e&#34;</span><span style="color:#ff79c6">]</span>: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1d&#34;</span><span style="color:#ff79c6">]</span>: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.data.aws_caller_identity.current: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>312785526160<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1b&#34;</span><span style="color:#ff79c6">]</span>: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>t3.large<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1a&#34;</span><span style="color:#ff79c6">]</span>: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>t3.large<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1f&#34;</span><span style="color:#ff79c6">]</span>: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>t3.large<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1c&#34;</span><span style="color:#ff79c6">]</span>: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>t3.large<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1d&#34;</span><span style="color:#ff79c6">]</span>: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>t3.large<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1e&#34;</span><span style="color:#ff79c6">]</span>: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>t2.micro<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_subnet.controller_subnet: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_subnet.controller_subnet: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>subnet-02f723bae6b659686<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_vpc.controller_vpc: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 1s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>vpc-0939e782f90671bfb<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+</span></span><span style="display:flex;"><span>  + create
+</span></span><span style="display:flex;"><span> &lt;<span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">read</span> <span style="color:#ff79c6">(</span>data resources<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Terraform will perform the following actions:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># module.aviatrix_controller_aws.module.aviatrix_controller_build.aws_eip.controller_eip will be created</span>
+</span></span><span style="display:flex;"><span>  + resource <span style="color:#f1fa8c">&#34;aws_eip&#34;</span> <span style="color:#f1fa8c">&#34;controller_eip&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">allocation_id</span>        <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">association_id</span>       <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">carrier_ip</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">customer_owned_ip</span>    <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">domain</span>               <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">id</span>                   <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">instance</span>             <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">network_border_group</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">network_interface</span>    <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">private_dns</span>          <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">private_ip</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">public_dns</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">public_ip</span>            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">public_ipv4_pool</span>     <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">tags</span>                 <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Createdby&#34;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;Terraform+Aviatrix&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;module&#34;</span>    <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;aviatrix-controller-build&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">tags_all</span>             <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Createdby&#34;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;Terraform+Aviatrix&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;module&#34;</span>    <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;aviatrix-controller-build&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">vpc</span>                  <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># module.aviatrix_controller_aws.module.aviatrix_controller_build.aws_eip_association.eip_assoc will be created</span>
+</span></span><span style="display:flex;"><span>  + resource <span style="color:#f1fa8c">&#34;aws_eip_association&#34;</span> <span style="color:#f1fa8c">&#34;eip_assoc&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">allocation_id</span>        <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">id</span>                   <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">instance_id</span>          <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">network_interface_id</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">private_ip_address</span>   <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">public_ip</span>            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># module.aviatrix_controller_aws.module.aviatrix_controller_build.aws_instance.aviatrix_controller will be created</span>
+</span></span><span style="display:flex;"><span>  + resource <span style="color:#f1fa8c">&#34;aws_instance&#34;</span> <span style="color:#f1fa8c">&#34;aviatrix_controller&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">ami</span>                                  <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;ami-083debf283d5fab1f&#34;</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">arn</span>                                  <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">associate_public_ip_address</span>          <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">availability_zone</span>                    <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;us-east-1a&#34;</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">cpu_core_count</span>                       <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">cpu_threads_per_core</span>                 <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">disable_api_stop</span>                     <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">disable_api_termination</span>              <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">true</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">ebs_optimized</span>                        <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">get_password_data</span>                    <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">false</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">host_id</span>                              <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">host_resource_group_arn</span>              <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">iam_instance_profile</span>                 <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;aviatrix-role-ec2&#34;</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">id</span>                                   <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">instance_initiated_shutdown_behavior</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">instance_state</span>                       <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">instance_type</span>                        <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;t3.large&#34;</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">ipv6_address_count</span>                   <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">ipv6_addresses</span>                       <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">key_name</span>                             <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;vPackets-AVX&#34;</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">monitoring</span>                           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">outpost_arn</span>                          <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">password_data</span>                        <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">placement_group</span>                      <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">placement_partition_number</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">primary_network_interface_id</span>         <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">private_dns</span>                          <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">private_ip</span>                           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">public_dns</span>                           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">public_ip</span>                            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">secondary_private_ips</span>                <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">security_groups</span>                      <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">subnet_id</span>                            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">tags</span>                                 <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Createdby&#34;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;Terraform+Aviatrix&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Name&#34;</span>      <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;AVX-Controller&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;module&#34;</span>    <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;aviatrix-controller-build&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">tags_all</span>                             <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Createdby&#34;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;Terraform+Aviatrix&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Name&#34;</span>      <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;AVX-Controller&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;module&#34;</span>    <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;aviatrix-controller-build&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">tenancy</span>                              <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">user_data</span>                            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">user_data_base64</span>                     <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">user_data_replace_on_change</span>          <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">false</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">vpc_security_group_ids</span>               <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      + capacity_reservation_specification <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">capacity_reservation_preference</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>          + capacity_reservation_target <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>              + <span style="color:#8be9fd;font-style:italic">capacity_reservation_id</span>                 <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>              + <span style="color:#8be9fd;font-style:italic">capacity_reservation_resource_group_arn</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      + ebs_block_device <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">delete_on_termination</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">device_name</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">encrypted</span>             <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">iops</span>                  <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">kms_key_id</span>            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">snapshot_id</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">tags</span>                  <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">throughput</span>            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">volume_id</span>             <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">volume_size</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">volume_type</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      + enclave_options <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">enabled</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      + ephemeral_block_device <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">device_name</span>  <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">no_device</span>    <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">virtual_name</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      + maintenance_options <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">auto_recovery</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      + metadata_options <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">http_endpoint</span>               <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">http_put_response_hop_limit</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">http_tokens</span>                 <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">instance_metadata_tags</span>      <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      + network_interface <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">delete_on_termination</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">false</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">device_index</span>          <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">network_card_index</span>    <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">network_interface_id</span>  <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      + private_dns_name_options <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">enable_resource_name_dns_a_record</span>    <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">enable_resource_name_dns_aaaa_record</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">hostname_type</span>                        <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      + root_block_device <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">delete_on_termination</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">true</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">device_name</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">encrypted</span>             <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">iops</span>                  <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">kms_key_id</span>            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">throughput</span>            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">volume_id</span>             <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">volume_size</span>           <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">64</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">volume_type</span>           <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;gp2&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># module.aviatrix_controller_aws.module.aviatrix_controller_build.aws_network_interface.eni_controller will be created</span>
+</span></span><span style="display:flex;"><span>  + resource <span style="color:#f1fa8c">&#34;aws_network_interface&#34;</span> <span style="color:#f1fa8c">&#34;eni_controller&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">arn</span>                       <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">id</span>                        <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">interface_type</span>            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">ipv4_prefix_count</span>         <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">ipv4_prefixes</span>             <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">ipv6_address_count</span>        <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">ipv6_address_list</span>         <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">ipv6_address_list_enabled</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">false</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">ipv6_addresses</span>            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">ipv6_prefix_count</span>         <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">ipv6_prefixes</span>             <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">mac_address</span>               <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">outpost_arn</span>               <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">owner_id</span>                  <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">private_dns_name</span>          <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">private_ip</span>                <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">private_ip_list</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">private_ip_list_enabled</span>   <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">false</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">private_ips</span>               <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">private_ips_count</span>         <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">security_groups</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">source_dest_check</span>         <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">true</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">subnet_id</span>                 <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;subnet-02f723bae6b659686&#34;</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">tags</span>                      <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Createdby&#34;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;Terraform+Aviatrix&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Name&#34;</span>      <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;controller_network_interface&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;module&#34;</span>    <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;aviatrix-controller-build&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">tags_all</span>                  <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Createdby&#34;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;Terraform+Aviatrix&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Name&#34;</span>      <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;controller_network_interface&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;module&#34;</span>    <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;aviatrix-controller-build&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      + attachment <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">attachment_id</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">device_index</span>  <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#8be9fd;font-style:italic">instance</span>      <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># module.aviatrix_controller_aws.module.aviatrix_controller_build.aws_security_group.aviatrix_security_group will be created</span>
+</span></span><span style="display:flex;"><span>  + resource <span style="color:#f1fa8c">&#34;aws_security_group&#34;</span> <span style="color:#f1fa8c">&#34;aviatrix_security_group&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">arn</span>                    <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">description</span>            <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;Aviatrix - Controller Security Group&#34;</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">egress</span>                 <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">id</span>                     <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">ingress</span>                <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">name</span>                   <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;AviatrixSecurityGroup&#34;</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">name_prefix</span>            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">owner_id</span>               <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">revoke_rules_on_delete</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">false</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">tags</span>                   <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Createdby&#34;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;Terraform+Aviatrix&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Name&#34;</span>      <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;controller_security_group&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;module&#34;</span>    <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;aviatrix-controller-build&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">tags_all</span>               <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Createdby&#34;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;Terraform+Aviatrix&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;Name&#34;</span>      <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;controller_security_group&#34;</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;module&#34;</span>    <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;aviatrix-controller-build&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">vpc_id</span>                 <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;vpc-0939e782f90671bfb&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># module.aviatrix_controller_aws.module.aviatrix_controller_build.aws_security_group_rule.egress_rule will be created</span>
+</span></span><span style="display:flex;"><span>  + resource <span style="color:#f1fa8c">&#34;aws_security_group_rule&#34;</span> <span style="color:#f1fa8c">&#34;egress_rule&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">cidr_blocks</span>              <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">[</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;0.0.0.0/0&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">from_port</span>                <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">id</span>                       <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">protocol</span>                 <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;-1&#34;</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">security_group_id</span>        <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">security_group_rule_id</span>   <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">self</span>                     <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">false</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">source_security_group_id</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">to_port</span>                  <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">type</span>                     <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;egress&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># module.aviatrix_controller_aws.module.aviatrix_controller_build.aws_security_group_rule.ingress_rule will be created</span>
+</span></span><span style="display:flex;"><span>  + resource <span style="color:#f1fa8c">&#34;aws_security_group_rule&#34;</span> <span style="color:#f1fa8c">&#34;ingress_rule&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">cidr_blocks</span>              <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">[</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">from_port</span>                <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">443</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">id</span>                       <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">protocol</span>                 <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;tcp&#34;</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">security_group_id</span>        <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">security_group_rule_id</span>   <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">self</span>                     <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">false</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">source_security_group_id</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">to_port</span>                  <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">443</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">type</span>                     <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;ingress&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># module.aviatrix_controller_aws.module.aviatrix_controller_initialize.data.aws_caller_identity.current will be read during apply</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># (depends on a resource or a module with changes pending)</span>
+</span></span><span style="display:flex;"><span> &lt;<span style="color:#ff79c6">=</span> data <span style="color:#f1fa8c">&#34;aws_caller_identity&#34;</span> <span style="color:#f1fa8c">&#34;current&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">account_id</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">arn</span>        <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">id</span>         <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">user_id</span>    <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># module.aviatrix_controller_aws.module.aviatrix_controller_initialize.data.aws_region.current will be read during apply</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># (depends on a resource or a module with changes pending)</span>
+</span></span><span style="display:flex;"><span> &lt;<span style="color:#ff79c6">=</span> data <span style="color:#f1fa8c">&#34;aws_region&#34;</span> <span style="color:#f1fa8c">&#34;current&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">description</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">endpoint</span>    <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">id</span>          <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">name</span>        <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># module.aviatrix_controller_aws.module.aviatrix_controller_initialize.null_resource.run_script will be created</span>
+</span></span><span style="display:flex;"><span>  + resource <span style="color:#f1fa8c">&#34;null_resource&#34;</span> <span style="color:#f1fa8c">&#34;run_script&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">id</span>       <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">triggers</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>          + <span style="color:#f1fa8c">&#34;argument_destroy&#34;</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Plan: <span style="color:#bd93f9">8</span> to add, <span style="color:#bd93f9">0</span> to change, <span style="color:#bd93f9">0</span> to destroy.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Changes to Outputs:
+</span></span><span style="display:flex;"><span>  + <span style="color:#8be9fd;font-style:italic">private_ip</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>  + <span style="color:#8be9fd;font-style:italic">public_ip</span>  <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Note: You didn<span style="color:#f1fa8c">&#39;t use the -out option to save this plan, so Terraform can&#39;</span>t guarantee to take exactly these actions <span style="color:#ff79c6">if</span> you run <span style="color:#f1fa8c">&#34;terraform apply&#34;</span> now.
+</span></span><span style="display:flex;"><span>nmichel@vPackets.local:/Users/nmichel/code/AVIATRIX/AVX-IAC/controller $                   
+</span></span></code></pre></div><p>A Terraform apply will deploy the AWS EC2 instance with the default security group and external IP address assigned.</p>
+<p>We will change that after the terraform apply. Code ommited to facilitate clarity.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>nmichel@vPackets.local:/Users/nmichel/code/AVIATRIX/AVX-IAC/controller $ terraform apply                                                                             <span style="color:#ff79c6">[</span>11/22/22 - 0:37:46<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.http.avx_iam_id: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.http.avx_iam_id: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>https://s3-us-west-2.amazonaws.com/aviatrix-download/AMI_ID/ami_id.json<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_availability_zones.all: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_vpc.controller_vpc: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_region.current: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.data.aws_caller_identity.current: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_region.current: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>us-east-1<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_availability_zones.all: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>us-east-1<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1f&#34;</span><span style="color:#ff79c6">]</span>: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1e&#34;</span><span style="color:#ff79c6">]</span>: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1a&#34;</span><span style="color:#ff79c6">]</span>: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1d&#34;</span><span style="color:#ff79c6">]</span>: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1c&#34;</span><span style="color:#ff79c6">]</span>: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1b&#34;</span><span style="color:#ff79c6">]</span>: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.data.aws_caller_identity.current: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 1s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>312785526160<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1f&#34;</span><span style="color:#ff79c6">]</span>: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 1s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>t3.large<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1c&#34;</span><span style="color:#ff79c6">]</span>: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 1s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>t3.large<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1e&#34;</span><span style="color:#ff79c6">]</span>: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 1s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>t2.micro<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1a&#34;</span><span style="color:#ff79c6">]</span>: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 1s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>t3.large<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1b&#34;</span><span style="color:#ff79c6">]</span>: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 1s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>t3.large<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_ec2_instance_type_offering.offering<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;us-east-1d&#34;</span><span style="color:#ff79c6">]</span>: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 1s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>t3.large<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_subnet.controller_subnet: Reading...
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_subnet.controller_subnet: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 0s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>subnet-02f723bae6b659686<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>module.aviatrix_controller_aws.module.aviatrix_controller_build.data.aws_vpc.controller_vpc: Read <span style="color:#8be9fd;font-style:italic">complete</span> after 1s <span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>vpc-0939e782f90671bfb<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+</span></span><span style="display:flex;"><span>  + create
+</span></span><span style="display:flex;"><span> &lt;<span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">read</span> <span style="color:#ff79c6">(</span>data resources<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Terraform will perform the following actions:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># module.aviatrix_controller_aws.module.aviatrix_controller_build.aws_eip.controller_eip will be created</span>
+</span></span><span style="display:flex;"><span>  + resource <span style="color:#f1fa8c">&#34;aws_eip&#34;</span> <span style="color:#f1fa8c">&#34;controller_eip&#34;</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">allocation_id</span>        <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">association_id</span>       <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">carrier_ip</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">customer_owned_ip</span>    <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">domain</span>               <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">id</span>                   <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">instance</span>             <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">network_border_group</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">network_interface</span>    <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">private_dns</span>          <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">private_ip</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">public_dns</span>           <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">public_ip</span>            <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>      + <span style="color:#8be9fd;font-style:italic">public_ipv4_pool</span>     <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>known after apply<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>......
+</span></span><span style="display:flex;"><span>......
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Apply complete! Resources: <span style="color:#bd93f9">8</span> added, <span style="color:#bd93f9">0</span> changed, <span style="color:#bd93f9">0</span> destroyed.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Outputs:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">private_ip</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;10.0.10.14&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">public_ip</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;34.235.66.100&#34;</span>
+</span></span></code></pre></div><p>There is another way to verify the parameters assigned during the creation:
+Terraform informs us that the private_ip of the controller is 10.0.10.14, the public IP assigned is 34.235.66.100.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>terraform output | sed -ne <span style="color:#f1fa8c">&#39;s/\(.*\) = \(.*\)/\1=&#34;\2&#34;/p&#39;</span> &gt; ../aviatrix_controller.tfvars
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">private_ip</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;&#34;</span>10.0.10.14<span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">public_ip</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;&#34;</span>34.235.66.100<span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span></code></pre></div><p>We will assign an elastic IP to the controller. The EC2 instance has an ID of i-08e9bfdfa2e1d21bf. We will reuse that ID</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws ec2 associate-address --instance-id i-08e9bfdfa2e1d21bf --public-ip a.b.c.d
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws ec2 modify-instance-attribute --instance-id i-08e9bfdfa2e1d21bf --groups <span style="color:#ff79c6">{</span>Use your Security group ID<span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><p>My controller is now fully reachable from my the subnets configured in my security group.</p>
+<p><img src="/images/aviatrix/controller/automatic-deployment/Fig1-controller-dashboard.png" alt="AVX-Controller"></p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="sidebar" class="default-animation">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+ 
+
+
+ <!DOCTYPE html>
+ <html>
+    <head>
+    </head>
+    <body>
+       <a href="http://blog.vpackets.net/">
+          <img alt="logo" src="/images/logo/vpackets-logo-white.png">
+       </a>
+    </body>
+ </html>
+        </div>
+        <div class="searchbox default-animation">
+          <label class="a11y-only" for="search-by">Search</label>
+          <i class="fas fa-search"></i>
+          <input data-search-input id="search-by" type="search" placeholder="Search...">
+          <span data-search-clear=""><i class="fas fa-times"></i></span>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1669101365" defer></script>
+        <script src="/js/lunr.min.js?1669101365" defer></script>
+        <script src="/js/lunr.stemmer.support.min.js?1669101365" defer></script>
+        <script src="/js/lunr.multi.min.js?1669101365" defer></script>
+        <script src="/js/lunr.en.min.js?1669101365" defer></script>
+        <script src="/js/search.js?1669101365" defer></script>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics">
+          <li data-nav-id="/aviatrix/" class="dd-item parent alwaysopen"><a href="/aviatrix/"><b>NET - Aviatrix</b> </a><ul id="subsections-e9c1f91d28a54160f285f33fe2da5aa4">
+          <li data-nav-id="/aviatrix/controller/" class="dd-item parent alwaysopen"><a href="/aviatrix/controller/">Controller</a><ul id="subsections-e93ffb5cc47e3ca6f70f1291165bddc0">
+          <li data-nav-id="/aviatrix/controller/manual-deployment/" class="dd-item"><a href="/aviatrix/controller/manual-deployment/"> Deploy a Controller - Manual</a></li>
+          <li data-nav-id="/aviatrix/controller/automation-deployment/" class="dd-item active"><a href="/aviatrix/controller/automation-deployment/"> Deploy a Controller - Terraform</a></li></ul></li></ul></li>
+          <li data-nav-id="/aws/" class="dd-item alwaysopen"><a href="/aws/"><b>AWS</b> </a><ul id="subsections-db8ac1d891f3a128ac6dc30cdc5237df">
+          <li data-nav-id="/aws/vpc/" class="dd-item alwaysopen"><a href="/aws/vpc/">VPC</a><ul id="subsections-eedb28a2d43a03290b8827bc6e7cbe62">
+          <li data-nav-id="/aws/vpc/manual-vpc/" class="dd-item"><a href="/aws/vpc/manual-vpc/">Create a VPC - Manual</a></li>
+          <li data-nav-id="/aws/vpc/automation-vpc/" class="dd-item"><a href="/aws/vpc/automation-vpc/">Create a VPC - Terraform</a></li></ul></li></ul></li>
+        </ul>
+        <div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter"></div>
+        <hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter">
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-language">Language</label>
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-variant">Theme</label>
+                  <select id="select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                    <option id="blue" value="blue" selected>Blue</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+              <script>window.variants && variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks"><a class="padding" onclick="clearHistory();"><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1669101365" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1669101365" defer></script>
+    <script src="/js/featherlight.min.js?1669101365" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/jquery.svg.pan.zoom.js?1669101365" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="https://unpkg.com/rapidoc/dist/rapidoc-min.js" defer></script>
+    <script>
+      window.themeUseSwagger = JSON.parse("{ \"theme\": \"light\" }");
+    </script>
+    <script src="/js/theme.js?1669101365" defer></script>
+  </body>
+</html>

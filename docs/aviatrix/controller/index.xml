@@ -14,5 +14,14 @@
       <guid>http://blog.vpackets.net/aviatrix/controller/manual-deployment/</guid>
       <description>In every modern SDDC solution, the first step is to deploy a controller. The aviatrix controller can be deployed in any Cloud service provider but this example will focus on deploying the Aviatrix controller on AWS. You have multiple ways to deploy an Aviatrix controller, you could either deploy it manually (the sole purpose of this post) or automate it using AWS cloudformation or Terraform (more on this one in a later post)</description>
     </item>
+    <item>
+      <title> Deploy a Controller - Terraform</title>
+      <link>http://blog.vpackets.net/aviatrix/controller/automation-deployment/</link>
+      <pubDate>Tue, 23 Aug 2022 13:57:51 -0500</pubDate>
+      <guid>http://blog.vpackets.net/aviatrix/controller/automation-deployment/</guid>
+      <description>Now that we have seen the steps to deploy an Aviatrix controller in AWS, we are going to see how easy it when we use Infrastructure as Code
+The following Terraform Registry shows the different registries and examples regarding the controller deployment in AWS, Azure, GCP and OCI. In my example I am using AWS and will demonstrate how easy and convenient it is.
+We will use the following AVX controller in AWS registry.</description>
+    </item>
   </channel>
 </rss>
