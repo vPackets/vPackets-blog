@@ -1,0 +1,55 @@
+[[main]]
+  name = "Home"
+  url = ""
+  weight = -110
+
+# Submenus are done this way: parent -> identifier
+
+
+[[main]]
+  name = "About"
+  url = "about/"
+  weight = -107
+
+# social menu links
+
+[[social]]
+  name = "Youtube"
+  type = "social"
+  weight = 1
+  url = "https://youtube.com/@vpackets"
+[[social]]
+  name = "github"
+  type = "social"
+  weight = 2
+  url = "https://github.com/vPackets"
+[[social]]
+  name = "twitter"
+  weight = 3
+  url = "https://twitter.com/vPackets"
+[[social]]
+  name = "linkedin"
+  weight = 4
+  url = "https://www.linkedin.com/in/mclnicolas/"
+[[social]]
+  name = "instagram"
+  weight = 5
+  url = "https://www.strava.com/athletes/29752545"
+[[social]]
+  name = "rss"
+  weight = 6
+  url = "index.xml"
+
+# other supported social links
+# name = "youtube"
+# url = "https://www.youtube.com/#"
+# name = "facebook"
+# url = "https://facebook.com/#"
+# name = "instagram"
+# url = "https://instagram.com/#"
+# name = "stackoverflow"
+# url = "https://stackoverflow.com/#"
+# name = "gitlab"
+# url = "https://gitlab.com/#"
+# name = "discord"
+# url = "https://discord.gg/#"

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AWS on Clarity</title>
+    <link>http://blog.vpackets.net/tags/aws/</link>
+    <description>Recent content in AWS on Clarity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Sun, 12 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.vpackets.net/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Create a VPC - Manual</title>
+      <link>http://blog.vpackets.net/post/aws/networking/manual-vpc/</link>
+      <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.vpackets.net/post/aws/networking/manual-vpc/</guid>
+      <description>
+        
+          
+            In this blogpost we are going to create a Virtual Private Cloud in Amazon Web Services that will host all the shared services generally deployed by an IT team. Since networking is fundamental to allow communication between servers and computers, every cloud service providers use a dedicated network construct. AWS and Google Cloud call it a VPC, while Azure for example calls it a VNET (virtual network).
+Network constructs are different between cloud providers.
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Create a VPC - Automation</title>
+      <link>http://blog.vpackets.net/post/aws/networking/automation-vpc/</link>
+      <pubDate>Sat, 11 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.vpackets.net/post/aws/networking/automation-vpc/</guid>
+      <description>
+        
+          
+            In a previous blogpost we managed to manually create a simple VPC that could host several services or traditionnal EC2 instances. This process was quite simple using the AWS console as it would deploy all the network construct within a VPC (Subnets, Route Tables, Internet Gateways etc...)
+I have been deploying network infrastructure (NSX, Cumulus, Cisco ...) for the past few years using Infrastructure as Code and naturally I will show you how to deploy networking cloud constructs related to AWS (not only !
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>AWS SAA-C03 Preparation</title>
+      <link>http://blog.vpackets.net/post/aws/certifications/saa-c03-introduction/</link>
+      <pubDate>Fri, 10 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.vpackets.net/post/aws/certifications/saa-c03-introduction/</guid>
+      <description>
+        
+          
+            This blogpost will link all the resources that I am using to pass this certification:
+Blueprint AWS SAA C03 Blueprint. Whitepapers and documentation AWS - Well Architected Framework. AWS - Service Overview. Training and Resources (order or priority) Adrian Cantrill - AWS SAA C03 Training. Andrew Brown - AWS Cloud Project Bootcamp. A Cloud Guru - AWS SAA C03 Training. Projects and Code AWS - BGP Infrastructure and 3 tier app - TBD.
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
