@@ -2,59 +2,59 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://blog.vpackets.net/post/frr/101-install/</loc>
+    <loc>https://blog.vpackets.net/post/frr/101-install/</loc>
     <lastmod>2023-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/post/aws/networking/manual-vpc/</loc>
+    <loc>https://blog.vpackets.net/post/aws/networking/manual-vpc/</loc>
     <lastmod>2023-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/post/aws/networking/automation-vpc/</loc>
+    <loc>https://blog.vpackets.net/post/aws/networking/automation-vpc/</loc>
     <lastmod>2023-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/post/aws/certifications/saa-c03-introduction/</loc>
+    <loc>https://blog.vpackets.net/post/aws/certifications/saa-c03-introduction/</loc>
     <lastmod>2023-03-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/</loc>
+    <loc>https://blog.vpackets.net/</loc>
     <lastmod>2023-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/categories/</loc>
+    <loc>https://blog.vpackets.net/categories/</loc>
     <lastmod>2023-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/tags/frr/</loc>
+    <loc>https://blog.vpackets.net/tags/frr/</loc>
     <lastmod>2023-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/tags/linux-networking/</loc>
+    <loc>https://blog.vpackets.net/tags/linux-networking/</loc>
     <lastmod>2023-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/categories/networking/</loc>
+    <loc>https://blog.vpackets.net/categories/networking/</loc>
     <lastmod>2023-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/post/</loc>
+    <loc>https://blog.vpackets.net/post/</loc>
     <lastmod>2023-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/tags/</loc>
+    <loc>https://blog.vpackets.net/tags/</loc>
     <lastmod>2023-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/tags/aws/</loc>
+    <loc>https://blog.vpackets.net/tags/aws/</loc>
     <lastmod>2023-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/categories/cloud-networking/</loc>
+    <loc>https://blog.vpackets.net/categories/cloud-networking/</loc>
     <lastmod>2023-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/tags/vpc/</loc>
+    <loc>https://blog.vpackets.net/tags/vpc/</loc>
     <lastmod>2023-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/categories/certifications/</loc>
+    <loc>https://blog.vpackets.net/categories/certifications/</loc>
     <lastmod>2023-03-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/archives/</loc>
+    <loc>https://blog.vpackets.net/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/about/</loc>
+    <loc>https://blog.vpackets.net/about/</loc>
     <lastmod>2019-02-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://blog.vpackets.net/search/</loc>
+    <loc>https://blog.vpackets.net/search/</loc>
   </url><url>
-    <loc>http://blog.vpackets.net/series/</loc>
+    <loc>https://blog.vpackets.net/series/</loc>
   </url>
 </urlset>

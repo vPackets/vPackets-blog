@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>FRR on Clarity</title>
-    <link>http://blog.vpackets.net/tags/frr/</link>
+    <link>https://blog.vpackets.net/tags/frr/</link>
     <description>Recent content in FRR on Clarity</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.vpackets.net/tags/frr/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.vpackets.net/tags/frr/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FRR 101 - Install</title>
-      <link>http://blog.vpackets.net/post/frr/101-install/</link>
+      <link>https://blog.vpackets.net/post/frr/101-install/</link>
       <pubDate>Mon, 13 Mar 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.vpackets.net/post/frr/101-install/</guid>
+      <guid>https://blog.vpackets.net/post/frr/101-install/</guid>
       <description>
         
           

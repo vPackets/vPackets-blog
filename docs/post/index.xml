@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Clarity</title>
-    <link>http://blog.vpackets.net/post/</link>
+    <link>https://blog.vpackets.net/post/</link>
     <description>Recent content in Posts on Clarity</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.vpackets.net/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.vpackets.net/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FRR 101 - Install</title>
-      <link>http://blog.vpackets.net/post/frr/101-install/</link>
+      <link>https://blog.vpackets.net/post/frr/101-install/</link>
       <pubDate>Mon, 13 Mar 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.vpackets.net/post/frr/101-install/</guid>
+      <guid>https://blog.vpackets.net/post/frr/101-install/</guid>
       <description>
         
           
@@ -26,10 +26,10 @@ Each of these operating systems has its unique features and capabilities, and th
     
     <item>
       <title>Create a VPC - Manual</title>
-      <link>http://blog.vpackets.net/post/aws/networking/manual-vpc/</link>
+      <link>https://blog.vpackets.net/post/aws/networking/manual-vpc/</link>
       <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.vpackets.net/post/aws/networking/manual-vpc/</guid>
+      <guid>https://blog.vpackets.net/post/aws/networking/manual-vpc/</guid>
       <description>
         
           
@@ -43,10 +43,10 @@ Network constructs are different between cloud providers.
     
     <item>
       <title>Create a VPC - Automation</title>
-      <link>http://blog.vpackets.net/post/aws/networking/automation-vpc/</link>
+      <link>https://blog.vpackets.net/post/aws/networking/automation-vpc/</link>
       <pubDate>Sat, 11 Mar 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.vpackets.net/post/aws/networking/automation-vpc/</guid>
+      <guid>https://blog.vpackets.net/post/aws/networking/automation-vpc/</guid>
       <description>
         
           
@@ -60,10 +60,10 @@ I have been deploying network infrastructure (NSX, Cumulus, Cisco ...) for the p
     
     <item>
       <title>AWS SAA-C03 Preparation</title>
-      <link>http://blog.vpackets.net/post/aws/certifications/saa-c03-introduction/</link>
+      <link>https://blog.vpackets.net/post/aws/certifications/saa-c03-introduction/</link>
       <pubDate>Fri, 10 Mar 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.vpackets.net/post/aws/certifications/saa-c03-introduction/</guid>
+      <guid>https://blog.vpackets.net/post/aws/certifications/saa-c03-introduction/</guid>
       <description>
         
           

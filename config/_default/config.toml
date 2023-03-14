@@ -1,6 +1,6 @@
 # set `baseurl` to your root domain
 # if you set it to "/" share icons won't work properly on production
-baseurl = "http://blog.vpackets.net/"  # Include trailing slash
+baseurl = "https://blog.vpackets.net/"  # Include trailing slash
 # title = "Clarity"  # Edit directly from config/_default/languages.toml # alternatively, uncomment this and remove `title` entry from the aforemention file.
 copyright = "Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved."
 # canonifyurls = true
@@ -23,7 +23,3 @@ series = "series"
 
 [outputs]
 home = ["HTML", "RSS", "JSON"]
-
-
-
-baseURL = 'http://blog.vpackets.net/'
