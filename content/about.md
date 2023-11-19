@@ -13,7 +13,7 @@ Welcome to vPackets.net !  The purpose of this blog is to share my experience re
 
 # Who am I ?
 
-My name is Nicolas MICHEL. I am a french networking engineer and expatriate
+My name is Nicolas MICHEL. I am a french networking engineer and expatriate.
 
 I have spent 15 years in the IT industry and I primarily focus on networking (Data Center – Enterprise Campus – WAN) and Unified Communications. After focusing on traditionnal networking  I realized that our industry was completely shifting to new frameworks and ways to deliver technological outcomes that would answer some business challenges that companies are struggling with. I decided to stay a networking expert but with a focus on Automation and Devops.
 
@@ -26,6 +26,7 @@ I have 3 wonderful kids and we live with my wife in Austin, TX. I am an ex natio
 
 ![Me](/images/intro/nicolas-head-shot.png)
 
+I am currently a Solution Architect at Cisco focusing on Cloud Service Providers.
 I had the privilege to experience multiple roles in my career. I have been delivering networking solutions, act as a solution architect. Recently I have been a Technical Product Manager (Technical marketing engineer) at VMware in charge of the layer 3 features of NSX and a Principal product manager at Aviatrix. I was working on the layer 3 features as well of Aviatrix.
 
 - Understand new use cases to be addressed in the  platform by developing deep technical relationships with the  customers and field teams, and by maintaining a broad understanding of the cloud networking market.
