@@ -26,8 +26,8 @@ I have 3 wonderful kids and we live with my wife in Austin, TX. I am an ex natio
 
 ![Me](/images/intro/nicolas-head-shot.png)
 
-I am currently a Solution Architect at Cisco focusing on Cloud Service Providers.
-I had the privilege to experience multiple roles in my career. I have been delivering networking solutions, act as a solution architect. Recently I have been a Technical Product Manager (Technical marketing engineer) at VMware in charge of the layer 3 features of NSX and a Principal product manager at Aviatrix. I was working on the layer 3 features as well of Aviatrix.
+I am currently a Solution Architect at Cisco focusing on Hyperscalers.
+I had the privilege to experience multiple roles in my career. I have been delivering networking solutions, act as a solution architect. Recently I have been a Technical Product Manager (Technical marketing engineer) at VMware in charge of the networking features of NSX (formerly NSX-T) and a Principal Product Manager at Aviatrix. 
 
 - Understand new use cases to be addressed in the  platform by developing deep technical relationships with the  customers and field teams, and by maintaining a broad understanding of the cloud networking market.
 - Design new, excitingnetworking features that address these use cases.  Partner with the engineering team to validate the feasibility and the development effort.  Identify tradeoffs when necessary.
@@ -42,15 +42,18 @@ I had the privilege to experience multiple roles in my career. I have been deliv
 
 I currently hold the following certifications:
 
-- CCIE #29410 Routing & Switching
-- CCIE #29410 Data Center
-- Aviatrix Certified Engineer - Associate
-- Aviatrix Certified Engineer - Professional
+- CCIE #29410 Routing & Switching - Emeritus
+- CCIE #29410 Data Center - Emeritus
+
 
 
 ![CCIE RS](/images/intro/ccie-rs.jpg?classes=inline,center) 
 ![CCIE DC](/images/intro/ccie-dc.jpg?classes=inline,center) 
+
+<!---
 ![ACE Associate](/images/intro/ace-associate.png?classes=inline,center) ![ACE Professionnal](/images/intro/ace-pro.png?classes=inline,center)
+-->
+
 
 
 

@@ -5,24 +5,16 @@
     <link>https://blog.vpackets.net/categories/certifications/</link>
     <description>Recent content in Certifications on Clarity</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 10 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.vpackets.net/categories/certifications/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Mar 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://blog.vpackets.net/categories/certifications/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AWS SAA-C03 Preparation</title>
       <link>https://blog.vpackets.net/post/aws/certifications/saa-c03-introduction/</link>
       <pubDate>Fri, 10 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.vpackets.net/post/aws/certifications/saa-c03-introduction/</guid>
-      <description>
-        
-          
-            This blogpost will link all the resources that I am using to pass this certification:
-Blueprint AWS SAA C03 Blueprint. Whitepapers and documentation AWS - Well Architected Framework. AWS - Service Overview. Training and Resources (order or priority) Adrian Cantrill - AWS SAA C03 Training. Andrew Brown - AWS Cloud Project Bootcamp. A Cloud Guru - AWS SAA C03 Training. Projects and Code AWS - BGP Infrastructure and 3 tier app - TBD.
-          
-          
-        
-      </description>
+      <description>This blogpost will link all the resources that I am using to pass this certification:&#xA;Blueprint AWS SAA C03 Blueprint. Whitepapers and documentation AWS - Well Architected Framework. AWS - Service Overview. Training and Resources (order or priority) Adrian Cantrill - AWS SAA C03 Training. Andrew Brown - AWS Cloud Project Bootcamp. A Cloud Guru - AWS SAA C03 Training. Projects and Code AWS - BGP Infrastructure and 3 tier app - TBD.</description>
     </item>
-    
   </channel>
 </rss>

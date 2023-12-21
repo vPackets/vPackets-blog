@@ -5,7 +5,37 @@
     <link>https://blog.vpackets.net/tags/</link>
     <description>Recent content in Tags on Clarity</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.vpackets.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://blog.vpackets.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FRR</title>
+      <link>https://blog.vpackets.net/tags/frr/</link>
+      <pubDate>Mon, 13 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>https://blog.vpackets.net/tags/frr/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux Networking</title>
+      <link>https://blog.vpackets.net/tags/linux-networking/</link>
+      <pubDate>Mon, 13 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>https://blog.vpackets.net/tags/linux-networking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AWS</title>
+      <link>https://blog.vpackets.net/tags/aws/</link>
+      <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>https://blog.vpackets.net/tags/aws/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VPC</title>
+      <link>https://blog.vpackets.net/tags/vpc/</link>
+      <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>https://blog.vpackets.net/tags/vpc/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
