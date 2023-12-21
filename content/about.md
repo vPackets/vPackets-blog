@@ -27,7 +27,7 @@ I have 3 wonderful kids and we live with my wife in Austin, TX. I am an ex natio
 ![Me](/images/intro/nicolas-head-shot.png)
 
 I am currently a Solution Architect at Cisco focusing on Hyperscalers.
-I had the privilege to experience multiple roles in my career. I have been delivering networking solutions, act as a solution architect. Recently I have been a Technical Product Manager (Technical marketing engineer) at VMware in charge of the networking features of NSX (formerly NSX-T) and a Principal Product Manager at Aviatrix. 
+I had the privilege to experience multiple roles in my career. I have been delivering networking solutions. In the past I have been a Network architect for several VARs, a Technical Product Manager (Technical marketing engineer) at VMware in charge of the networking features of NSX (formerly NSX-T) and a Principal Product Manager at Aviatrix. 
 
 - Understand new use cases to be addressed in the  platform by developing deep technical relationships with the  customers and field teams, and by maintaining a broad understanding of the cloud networking market.
 - Design new, excitingnetworking features that address these use cases.  Partner with the engineering team to validate the feasibility and the development effort.  Identify tradeoffs when necessary.
