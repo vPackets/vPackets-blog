@@ -7,14 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://blog.vpackets.net/categories/networking/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.vpackets.net/categories/networking/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FRR 101 - Install</title>
       <link>https://blog.vpackets.net/post/frr/101-install/</link>
       <pubDate>Mon, 13 Mar 2023 00:00:00 +0000</pubDate>
+      
       <guid>https://blog.vpackets.net/post/frr/101-install/</guid>
-      <description>Networkingg vendors like Cisco, Arista , Juniper have developped their own operating system and all networking engineers had to learn them in order to be relevant when designing, implementing or supporting their own network.&#xA;Each of these operating systems has its unique features and capabilities, and they are used in different network environments and for different purposes. Some are more suitable for small-scale networks, while others are designed for large-scale enterprise networks.</description>
+      <description>
+        
+          
+            Networkingg vendors like Cisco, Arista , Juniper have developped their own operating system and all networking engineers had to learn them in order to be relevant when designing, implementing or supporting their own network.
+Each of these operating systems has its unique features and capabilities, and they are used in different network environments and for different purposes. Some are more suitable for small-scale networks, while others are designed for large-scale enterprise networks.
+          
+          
+        
+      </description>
     </item>
+    
   </channel>
 </rss>

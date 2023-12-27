@@ -7,28 +7,6 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://blog.vpackets.net/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Networking</title>
-      <link>https://blog.vpackets.net/categories/networking/</link>
-      <pubDate>Mon, 13 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>https://blog.vpackets.net/categories/networking/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Cloud Networking</title>
-      <link>https://blog.vpackets.net/categories/cloud-networking/</link>
-      <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>https://blog.vpackets.net/categories/cloud-networking/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Certifications</title>
-      <link>https://blog.vpackets.net/categories/certifications/</link>
-      <pubDate>Fri, 10 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>https://blog.vpackets.net/categories/certifications/</guid>
-      <description></description>
-    </item>
+    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.vpackets.net/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
