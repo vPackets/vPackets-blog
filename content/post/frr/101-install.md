@@ -17,7 +17,7 @@ categories = [
 thumbnail = "images/router.png"
 +++
 
-Networkingg vendors like Cisco, Arista , Juniper have developped their own operating system and all networking engineers had to learn them in order to be relevant when designing, implementing or supporting their own network.
+Networking vendors like Cisco, Arista , Juniper have developped their own operating system and all networking engineers had to learn them in order to be relevant when designing, implementing or supporting their own network.
 
 Each of these operating systems has its unique features and capabilities, and they are used in different network environments and for different purposes. Some are more suitable for small-scale networks, while others are designed for large-scale enterprise networks.
 It should be noted that most of these Network OS are based on Linux or BSD. 
@@ -31,7 +31,7 @@ Cisco IOS XR - used for Cisco ASR 9000 series routers
 Cisco NX-OS - used for Cisco Nexus series switches
 
 
-It is important to fathom that there are some open source projects focusing on network OS:
+It is important to fathom that there are some open source projects focusing on network operating systems (NetOS):
 
 * [Quagga](https://en.wikipedia.org/wiki/Quagga_(software)) - open-source routing suite that supports multiple routing protocols. Maintained between 2001 and 2018 and created as an alternative to proprietary routing solutions. It was based on the Zebra routing suite.
 
