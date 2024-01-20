@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html
   lang="en"
-  data-figures=""
+  data-figures="true"
   
     class="page"
   
   
   >
   <head>
-<title>Clarity</title>
+<title>Lightweight Linux Containers in Containerlab | Clarity</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,24 +18,25 @@
 
 
 
+
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="" />
+<meta name="description" content="Deploy lightweight linux container to test your lab in containerlab." />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@vPackets">
-<meta name="twitter:title" content="" />
-<meta name="twitter:image" content="https://blog.vpackets.net/images/thumbnail.png"/>
-<meta property="og:url" content="https://blog.vpackets.net/archives/" />
-<meta property="og:title" content="" />
-<meta property="og:description" content="" />
-<meta property="og:image" content="https://blog.vpackets.net/images/thumbnail.png" />
+<meta name="twitter:title" content="Lightweight Linux Containers in Containerlab" />
+<meta name="twitter:image" content="https://blog.vpackets.net/images/path/share.png"/>
+<meta property="og:url" content="https://blog.vpackets.net/post/containerlab/linux-container/" />
+<meta property="og:title" content="Lightweight Linux Containers in Containerlab" />
+<meta property="og:description" content="Deploy lightweight linux container to test your lab in containerlab." />
+<meta property="og:image" content="https://blog.vpackets.net/images/path/share.png" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.vpackets.net/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://blog.vpackets.net/icons/favicon-32x32.png">
 <link rel="manifest" href="https://blog.vpackets.net/icons/site.webmanifest">
 
-<link rel="canonical" href="https://blog.vpackets.net/archives/">
+<link rel="canonical" href="https://blog.vpackets.net/post/containerlab/linux-container/">
 
 
 
@@ -51,7 +52,7 @@
 
   </head>
   <body
-    data-code="7"
+    data-code="10"
     data-lines="false"
     id="documentTop"
     data-lang="en"
@@ -144,7 +145,7 @@
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title"></h1>
+    <h1 class="post_title">Lightweight Linux Containers in Containerlab</h1>
   <div class="post_meta">
     <span><svg class="icon">
   <title>calendar</title>
@@ -152,19 +153,22 @@
 </svg>
 </span>
     <span class="post_date">
-      May 28, 2019</span>
-    <span class="post_time"> · 0 min read</span>
+      Jan 19, 2024</span>
+    <span class="post_time"> · 4 min read</span><span>&nbsp;· <a href='https://blog.vpackets.net/tags/containerlab/' title="Containerlab" class="post_tag button button_translucent">Containerlab
+        </a><a href='https://blog.vpackets.net/tags/networking/' title="Networking" class="post_tag button button_translucent">Networking
+        </a>
+    </span>
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=&url=https%3a%2f%2fblog.vpackets.net%2farchives%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=Lightweight%20Linux%20Containers%20in%20Containerlab&url=https%3a%2f%2fblog.vpackets.net%2fpost%2fcontainerlab%2flinux-container%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>twitter</title>
   <use xlink:href="#twitter"></use>
 </svg>
 
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.vpackets.net%2farchives%2f&t=" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.vpackets.net%2fpost%2fcontainerlab%2flinux-container%2f&t=Lightweight%20Linux%20Containers%20in%20Containerlab" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>facebook</title>
   <use xlink:href="#facebook"></use>
@@ -178,7 +182,7 @@
 </svg>
 
     </a>
-    <a href="https://blog.vpackets.net/archives/" title="Copy Link" class="link link_yank">
+    <a href="https://blog.vpackets.net/post/containerlab/linux-container/" title="Copy Link" class="link link_yank">
       <svg class="icon">
   <title>copy</title>
   <use xlink:href="#copy"></use>
@@ -188,8 +192,228 @@
   </div>
   </span>
   </div>
+<div class="post_featured"><figure>
+  <picture>
 
-    <div class="post_body">
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Containerlab Logo !"
+      
+        class="image_figure image_featured image_internal image_unprocessed"
+        src="/images/containerlab/linux/containerlab.png"
+      
+      
+        title="Containerlab Rocks !"
+      
+    />
+
+    <figcaption class="caption_figure caption_featured caption_internal">Containerlab Rocks !</figcaption></picture>
+</figure>
+
+      </div>
+    <div class="post_body"><p>When I was labbing back in the days on GNS3, all I needed to test my routing was another router. That networking device sole purpose was to ping accross the network. I just had to create a default route pointing to the upstream router and I could ping (if my lab was working.)</p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="GNS Lab"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="/images/containerlab/linux/gns3-lab.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>Nowadays and with infrastructure as code, I don't want to spend time configuring IP addresses on routers and preserve as much resources as I can.
+I have decided to use 2 containers that will be configured with the same IP addresses for every single lab: 192.0.2.100/24 and 203.0.113.100 .</p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Linux Containers on Containerlab"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="/images/containerlab/linux/containerlab-linux.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>These 2 IP addresses belong to subnets reserved for documentation as mentionned in <a href="https://datatracker.ietf.org/doc/html/rfc5737">RFC5737</a></p>
+<p>I did it by creating two lightweight containers with a few network tools that are useful for my daily lab operations (Just realized I could add scapy to the container as well):</p>
+<ul>
+<li><a href="https://github.com/iputils/iputils">iputils</a></li>
+<li><a href="https://github.com/esnet/iperf">iperf3</a></li>
+<li><a href="https://en.wikipedia.org/wiki/MTR_(software)">mytraceroute(mtr)</a></li>
+<li><a href="https://pkgs.alpinelinux.org/package/edge/main/x86/bind-tools">bind-tools</a></li>
+<li><a href="https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/net/netcat-openbsd/index.html">netcat-openbsd</a></li>
+<li><a href="https://curl.se/">curl</a></li>
+<li><a href="https://nmap.org/">nmap</a></li>
+</ul>
+<p>All of my labs will have these 2 containers so I can test various things using very little resources. The docker images are 38MB and booting them is almost instant.</p>
+<p>Usually I leave Eth0 for management and Eth1 for the datapath of my actual lab.</p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="clab network and datapath"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="/images/containerlab/linux/containerlab-linux-clab-network.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>Here are the dockerfiles.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">FROM</span> <span class="n">alpine</span><span class="p">:</span><span class="n">latest</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"># Label the image</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="n">LABEL</span> <span class="n">maintainer</span><span class="o">=</span><span class="s2">&#34;nicolas@vpackets.net&#34;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1"># Update package list and install network tools</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="n">RUN</span> <span class="n">apk</span> <span class="n">add</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cache</span> <span class="n">bash</span> \
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="n">iputils</span> \
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">iperf3</span> \
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="n">mtr</span> \
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="n">bind</span><span class="o">-</span><span class="n">tools</span> \
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">netcat</span><span class="o">-</span><span class="n">openbsd</span> \
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="n">curl</span> \
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="n">nmap</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="n">COPY</span> <span class="n">network</span><span class="o">-</span><span class="n">config</span><span class="o">.</span><span class="n">sh</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="n">RUN</span> <span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">network</span><span class="o">-</span><span class="n">config</span><span class="o">.</span><span class="n">sh</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="c1"># Set the default command to launch when starting the container</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="c1"># CMD [&#34;/usr/local/bin/network-config.sh&#34;]</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="n">CMD</span> <span class="p">[</span><span class="s2">&#34;sh&#34;</span><span class="p">]</span>
+</span></span></code></pre></div><p>When the image is being built, it will copy the network-config.sh that needs to be in the same folder as the Dockerfile (example for Container-ISP-01):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="cp">#!/bin/sh 
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">
+</span></span><span class="line"><span class="ln">4</span><span class="cl">ip addr add 192.0.2.100/24 dev eth1
+</span></span><span class="line"><span class="ln">5</span><span class="cl">ip link <span class="nb">set</span> eth1 up
+</span></span><span class="line"><span class="ln">6</span><span class="cl">ip route add 203.0.113.0/24 via 192.0.2.1 dev eth1
+</span></span></code></pre></div><p>and this is the network-config.sh script for the Container-ISP-02:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="cp">#!/bin/sh 
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">
+</span></span><span class="line"><span class="ln">4</span><span class="cl">ip addr add 203.0.113.100/24 dev eth1
+</span></span><span class="line"><span class="ln">5</span><span class="cl">ip link <span class="nb">set</span> eth1 up
+</span></span><span class="line"><span class="ln">6</span><span class="cl">ip route add 192.0.2.0/24 via 203.0.113.1 dev eth1
+</span></span></code></pre></div><p>These networking-script will be ran when the container will be launched, thanks Containerlab</p>
+<p>You can pull the image directly from the docker hub registry here:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">docker</span> <span class="n">pull</span> <span class="n">vpackets</span><span class="o">/</span><span class="n">alpine</span><span class="o">-</span><span class="n">tools</span><span class="o">-</span><span class="n">containerlab</span><span class="o">-</span><span class="n">isp</span><span class="o">-</span><span class="mi">01</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">docker</span> <span class="n">pull</span> <span class="n">vpackets</span><span class="o">/</span><span class="n">alpine</span><span class="o">-</span><span class="n">tools</span><span class="o">-</span><span class="n">containerlab</span><span class="o">-</span><span class="n">isp</span><span class="o">-</span><span class="mi">02</span>
+</span></span></code></pre></div><p>Here is an example if you want to launch that linux container in a containerlab yaml topology:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">name</span><span class="p">:</span> <span class="n">eBGP</span><span class="o">-</span><span class="n">c8K</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="n">topology</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">  <span class="n">nodes</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="n">linux01</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">      <span class="n">kind</span><span class="p">:</span> <span class="n">linux</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">      <span class="n">image</span><span class="p">:</span> <span class="n">vpackets</span><span class="o">/</span><span class="n">alpine</span><span class="o">-</span><span class="n">tools</span><span class="o">-</span><span class="n">containerlab</span><span class="o">-</span><span class="n">isp</span><span class="o">-</span><span class="mi">01</span><span class="p">:</span><span class="n">latest</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">      <span class="n">exec</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="o">-</span> <span class="n">sh</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">network</span><span class="o">-</span><span class="n">config</span><span class="o">.</span><span class="n">sh</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="n">linux02</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">      <span class="n">kind</span><span class="p">:</span> <span class="n">linux</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">      <span class="n">image</span><span class="p">:</span> <span class="n">vpackets</span><span class="o">/</span><span class="n">alpine</span><span class="o">-</span><span class="n">tools</span><span class="o">-</span><span class="n">containerlab</span><span class="o">-</span><span class="n">isp</span><span class="o">-</span><span class="mi">02</span><span class="p">:</span><span class="n">latest</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">      <span class="n">exec</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="o">-</span> <span class="n">sh</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">network</span><span class="o">-</span><span class="n">config</span><span class="o">.</span><span class="n">sh</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="n">Cisco8201</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">      <span class="n">kind</span><span class="p">:</span> <span class="n">cisco_c8000</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">      <span class="n">image</span><span class="p">:</span> <span class="mi">8201</span><span class="o">-</span><span class="mi">32</span><span class="n">fh_214</span><span class="p">:</span><span class="mf">7.10</span><span class="o">.</span><span class="mi">1</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="n">Cisco8201</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span> 
+</span></span><span class="line"><span class="ln">22</span><span class="cl">      <span class="n">kind</span><span class="p">:</span> <span class="n">cisco_c8000</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">      <span class="n">image</span><span class="p">:</span> <span class="mi">8201</span><span class="o">-</span><span class="mi">32</span><span class="n">fh_214</span><span class="p">:</span><span class="mf">7.10</span><span class="o">.</span><span class="mi">1</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">
+</span></span><span class="line"><span class="ln">25</span><span class="cl">  <span class="n">links</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="o">-</span> <span class="n">endpoints</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;linux01:eth1&#34;</span><span class="p">,</span> <span class="s2">&#34;Cisco8201-1:FH0_0_0_0&#34;</span><span class="p">]</span>   
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="o">-</span> <span class="n">endpoints</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;Cisco8201-1:FH0_0_0_1&#34;</span><span class="p">,</span> <span class="s2">&#34;Cisco8201-2:FH0_0_0_1&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="o">-</span> <span class="n">endpoints</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;linux02:eth1&#34;</span><span class="p">,</span> <span class="s2">&#34;Cisco8201-2:FH0_0_0_0&#34;</span><span class="p">]</span>
+</span></span></code></pre></div><p>When you launch the lab and access the linux containers, this is what you can expect:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln"> 1</span><span class="cl">vpackets@srv-containerlab:/home/vpackets $ docker exec -it clab-eBGP-CSR-linux01 sh
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">/ # ip a
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN qlen 1000
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    inet 127.0.0.1/8 scope host lo
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    inet6 ::1/128 scope host
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="ln">10</span><span class="cl">85: eth0@if86: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt; mtu 1500 qdisc noqueue state UP
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    link/ether 02:42:ac:14:14:04 brd ff:ff:ff:ff:ff:ff
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    inet 172.20.20.4/24 brd 172.20.20.255 scope global eth0
+</span></span><span class="line"><span class="ln">13</span><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    inet6 2001:172:20:20::4/64 scope global flags 02
+</span></span><span class="line"><span class="ln">15</span><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    inet6 fe80::42:acff:fe14:1404/64 scope link
+</span></span><span class="line"><span class="ln">17</span><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="ln">18</span><span class="cl">90: eth1@if89: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt; mtu 9500 qdisc noqueue state UP
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    link/ether aa:c1:ab:a4:ab:cc brd ff:ff:ff:ff:ff:ff
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    inet 192.0.2.100/24 scope global eth1
+</span></span><span class="line"><span class="ln">21</span><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="ln">22</span><span class="cl">    inet6 fe80::a8c1:abff:fea4:abcc/64 scope link
+</span></span><span class="line"><span class="ln">23</span><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="ln">24</span><span class="cl">/ # ip route
+</span></span><span class="line"><span class="ln">25</span><span class="cl">default via 172.20.20.1 dev eth0
+</span></span><span class="line"><span class="ln">26</span><span class="cl">172.20.20.0/24 dev eth0 scope link  src 172.20.20.4
+</span></span><span class="line"><span class="ln">27</span><span class="cl">192.0.2.0/24 dev eth1 scope link  src 192.0.2.100
+</span></span><span class="line"><span class="ln">28</span><span class="cl">203.0.113.0/24 via 192.0.2.1 dev eth1
+</span></span><span class="line"><span class="ln">29</span><span class="cl">/ #
+</span></span></code></pre></div><p>Containerlab will automatically assign an IP on eth0 with a range of 172.20.20.0/24 and the custom script will take care of the eth1 configuration.</p>
+<p>That way, I am able to identify these routes and subnets in my lab pretty easily and know which route belong to which host.</p>
+<p>Happy labbing</p>
+<p>Blogpost: Not created with ChatGPT :)</p>
+
     </div>
 <div class="post_comments">
   
@@ -207,7 +431,7 @@
     
   
   <div class="search">
-    <input type="search" class="search_field form_field" placeholder='Search...' id="find" autocomplete="off" data-scope=''>
+    <input type="search" class="search_field form_field" placeholder='Search...' id="find" autocomplete="off" data-scope='post'>
     <label for="find" class="search_label"><svg class="icon">
   <title>search</title>
   <use xlink:href="#search"></use>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Networking on Clarity</title>
+    <link>https://blog.vpackets.net/tags/networking/</link>
+    <description>Recent content in Networking on Clarity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Fri, 19 Jan 2024 17:33:23 -0600</lastBuildDate><atom:link href="https://blog.vpackets.net/tags/networking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lightweight Linux Containers in Containerlab</title>
+      <link>https://blog.vpackets.net/post/containerlab/linux-container/</link>
+      <pubDate>Fri, 19 Jan 2024 17:33:23 -0600</pubDate>
+      
+      <guid>https://blog.vpackets.net/post/containerlab/linux-container/</guid>
+      <description>
+        
+          
+            When I was labbing back in the days on GNS3, all I needed to test my routing was another router. That networking device sole purpose was to ping accross the network. I just had to create a default route pointing to the upstream router and I could ping (if my lab was working.)
+Nowadays and with infrastructure as code, I don&#39;t want to spend time configuring IP addresses on routers and preserve as much resources as I can.
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
