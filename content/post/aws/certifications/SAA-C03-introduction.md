@@ -3,7 +3,7 @@ title = "AWS SAA-C03 Preparation"
 description = "How do I prepare for the AWS SAA-C03"
 date = "2023-03-10"
 
-weight = 1
+weight = 3
 
 tags = [
     "AWS",

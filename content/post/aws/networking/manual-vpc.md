@@ -3,7 +3,7 @@ title = "Create a VPC - Manual"
 description = "Walkthrough of a VPC creation in AWS"
 date = "2023-03-12"
 
-weight = 1
+weight = 3
 
 tags = [
     "AWS",

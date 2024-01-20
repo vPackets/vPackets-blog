@@ -3,7 +3,7 @@ title = "FRR 101 - Install"
 description = "FRR 101 and basic connectivity test"
 date = "2023-03-13"
 
-weight = 1
+weight = 2
 
 tags = [
     "FRR",
