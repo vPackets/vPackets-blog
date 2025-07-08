@@ -2,62 +2,33 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS on Clarity</title>
-    <link>https://blog.vpackets.net/tags/aws/</link>
+    <link>http://localhost:1313/tags/aws/</link>
     <description>Recent content in AWS on Clarity</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Sun, 12 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.vpackets.net/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Mar 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/aws/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Create a VPC - Manual</title>
-      <link>https://blog.vpackets.net/post/aws/networking/manual-vpc/</link>
+      <link>http://localhost:1313/post/aws/networking/manual-vpc/</link>
       <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.vpackets.net/post/aws/networking/manual-vpc/</guid>
-      <description>
-        
-          
-            In this blogpost we are going to create a Virtual Private Cloud in Amazon Web Services that will host all the shared services generally deployed by an IT team. Since networking is fundamental to allow communication between servers and computers, every cloud service providers use a dedicated network construct. AWS and Google Cloud call it a VPC, while Azure for example calls it a VNET (virtual network).
-Network constructs are different between cloud providers.
-          
-          
-        
-      </description>
+      <guid>http://localhost:1313/post/aws/networking/manual-vpc/</guid>
+      <description>&lt;p&gt;In this blogpost we are going to create a &lt;a href=&#34;https://docs.aws.amazon.com/vpc/&#34;&gt;Virtual Private Cloud&lt;/a&gt; in &lt;a href=&#34;https://aws.amazon.com/&#34;&gt;Amazon Web Services&lt;/a&gt; that will host all the shared services generally deployed by an IT team.&#xA;Since networking is fundamental to allow communication between servers and computers, every cloud service providers use a dedicated network construct. AWS and Google Cloud call it a VPC, while Azure for example calls it a VNET (virtual network).&lt;/p&gt;&#xA;&lt;p&gt;Network constructs are different between cloud providers. For example, a VPC is global in Google Cloud while it is a regional construct in AWS. This blogpost is not targeted to highlight the networking differences between AWS and GCP (more on that in a dedicated blogpost).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Create a VPC - Automation</title>
-      <link>https://blog.vpackets.net/post/aws/networking/automation-vpc/</link>
+      <link>http://localhost:1313/post/aws/networking/automation-vpc/</link>
       <pubDate>Sat, 11 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.vpackets.net/post/aws/networking/automation-vpc/</guid>
-      <description>
-        
-          
-            In a previous blogpost we managed to manually create a simple VPC that could host several services or traditionnal EC2 instances. This process was quite simple using the AWS console as it would deploy all the network construct within a VPC (Subnets, Route Tables, Internet Gateways etc...)
-I have been deploying network infrastructure (NSX, Cumulus, Cisco ...) for the past few years using Infrastructure as Code and naturally I will show you how to deploy networking cloud constructs related to AWS (not only !
-          
-          
-        
-      </description>
+      <guid>http://localhost:1313/post/aws/networking/automation-vpc/</guid>
+      <description>&lt;p&gt;In a previous blogpost we managed to manually create a simple VPC that could host several services or traditionnal &lt;a href=&#34;https://aws.amazon.com/pm/ec2/&#34;&gt;EC2 instances&lt;/a&gt;.&#xA;This process was quite simple using the AWS console as it would deploy all the network construct within a VPC (Subnets, Route Tables, Internet Gateways etc...)&lt;/p&gt;&#xA;&lt;p&gt;I have been deploying network infrastructure (NSX, Cumulus, Cisco ...) for the past few years using &lt;a href=&#34;https://www.ipspace.net/kb/tag/network-infrastructure-as-code.html&#34;&gt;Infrastructure as Code&lt;/a&gt; and naturally I will show you how to deploy networking cloud constructs related to AWS (not only !) using &lt;a href=&#34;https://cloud.hashicorp.com/products/terraform&#34;&gt;Terraform&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>AWS SAA-C03 Preparation</title>
-      <link>https://blog.vpackets.net/post/aws/certifications/saa-c03-introduction/</link>
+      <link>http://localhost:1313/post/aws/certifications/saa-c03-introduction/</link>
       <pubDate>Fri, 10 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.vpackets.net/post/aws/certifications/saa-c03-introduction/</guid>
-      <description>
-        
-          
-            This blogpost will link all the resources that I am using to pass this certification:
-Blueprint AWS SAA C03 Blueprint. Whitepapers and documentation AWS - Well Architected Framework. AWS - Service Overview. Training and Resources (order or priority) Adrian Cantrill - AWS SAA C03 Training. Andrew Brown - AWS Cloud Project Bootcamp. A Cloud Guru - AWS SAA C03 Training. Projects and Code AWS - BGP Infrastructure and 3 tier app - TBD.
-          
-          
-        
-      </description>
+      <guid>http://localhost:1313/post/aws/certifications/saa-c03-introduction/</guid>
+      <description>&lt;p&gt;This blogpost will link all the resources that I am using to pass this certification:&lt;/p&gt;&#xA;&lt;h3 id=&#34;blueprint&#34;&gt;Blueprint&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Exam-Guide.pdf&#34;&gt;AWS SAA C03 Blueprint&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;whitepapers-and-documentation&#34;&gt;Whitepapers and documentation&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html&#34;&gt;AWS - Well Architected Framework&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html&#34;&gt;AWS - Service Overview&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;training-and-resources-order-or-priority&#34;&gt;Training and Resources (order or priority)&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://learn.cantrill.io/p/aws-certified-solutions-architect-associate-saa-c02&#34;&gt;Adrian Cantrill - AWS SAA C03 Training&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=8b8SvQHc4Pk&amp;amp;list=PLBfufR7vyJJ7k25byhRXJldB5AiwgNnWv&#34;&gt;Andrew Brown - AWS Cloud Project Bootcamp&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://learn.acloud.guru/dashboard&#34;&gt;A Cloud Guru - AWS SAA C03 Training&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;projects-and-code&#34;&gt;Projects and Code&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://blog.vpackets.net&#34;&gt;AWS - BGP Infrastructure and 3 tier app - TBD&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
   </channel>
 </rss>

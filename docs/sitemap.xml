@@ -2,71 +2,71 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.vpackets.net/post/containerlab/linux-container/</loc>
+    <loc>http://localhost:1313/post/containerlab/linux-container/</loc>
     <lastmod>2024-01-19T17:33:23-06:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/post/frr/101-install/</loc>
+    <loc>http://localhost:1313/post/frr/101-install/</loc>
     <lastmod>2023-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/post/aws/networking/manual-vpc/</loc>
+    <loc>http://localhost:1313/post/aws/networking/manual-vpc/</loc>
     <lastmod>2023-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/post/aws/networking/automation-vpc/</loc>
+    <loc>http://localhost:1313/post/aws/networking/automation-vpc/</loc>
     <lastmod>2023-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/post/aws/certifications/saa-c03-introduction/</loc>
+    <loc>http://localhost:1313/post/aws/certifications/saa-c03-introduction/</loc>
     <lastmod>2023-03-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2024-01-19T17:33:23-06:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
     <lastmod>2024-01-19T17:33:23-06:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/tags/containerlab/</loc>
+    <loc>http://localhost:1313/tags/containerlab/</loc>
     <lastmod>2024-01-19T17:33:23-06:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/tags/networking/</loc>
+    <loc>http://localhost:1313/tags/networking/</loc>
     <lastmod>2024-01-19T17:33:23-06:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/post/</loc>
+    <loc>http://localhost:1313/post/</loc>
     <lastmod>2024-01-19T17:33:23-06:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2024-01-19T17:33:23-06:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/categories/technology/</loc>
+    <loc>http://localhost:1313/categories/technology/</loc>
     <lastmod>2024-01-19T17:33:23-06:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/tags/frr/</loc>
+    <loc>http://localhost:1313/tags/frr/</loc>
     <lastmod>2023-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/tags/linux-networking/</loc>
+    <loc>http://localhost:1313/tags/linux-networking/</loc>
     <lastmod>2023-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/categories/networking/</loc>
+    <loc>http://localhost:1313/categories/networking/</loc>
     <lastmod>2023-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/tags/aws/</loc>
+    <loc>http://localhost:1313/tags/aws/</loc>
     <lastmod>2023-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/categories/cloud-networking/</loc>
+    <loc>http://localhost:1313/categories/cloud-networking/</loc>
     <lastmod>2023-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/tags/vpc/</loc>
+    <loc>http://localhost:1313/tags/vpc/</loc>
     <lastmod>2023-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/categories/certifications/</loc>
+    <loc>http://localhost:1313/categories/certifications/</loc>
     <lastmod>2023-03-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/archives/</loc>
+    <loc>http://localhost:1313/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/about/</loc>
+    <loc>http://localhost:1313/about/</loc>
     <lastmod>2019-02-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.vpackets.net/search/</loc>
+    <loc>http://localhost:1313/search/</loc>
   </url><url>
-    <loc>https://blog.vpackets.net/series/</loc>
+    <loc>http://localhost:1313/series/</loc>
   </url>
 </urlset>

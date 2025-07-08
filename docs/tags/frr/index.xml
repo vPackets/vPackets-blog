@@ -2,28 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>FRR on Clarity</title>
-    <link>https://blog.vpackets.net/tags/frr/</link>
+    <link>http://localhost:1313/tags/frr/</link>
     <description>Recent content in FRR on Clarity</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.vpackets.net/tags/frr/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/frr/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FRR 101 - Install</title>
-      <link>https://blog.vpackets.net/post/frr/101-install/</link>
+      <link>http://localhost:1313/post/frr/101-install/</link>
       <pubDate>Mon, 13 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.vpackets.net/post/frr/101-install/</guid>
-      <description>
-        
-          
-            Networking vendors like Cisco, Arista , Juniper have developped their own operating system and all networking engineers had to learn them in order to be relevant when designing, implementing or supporting their own network.
-Each of these operating systems has its unique features and capabilities, and they are used in different network environments and for different purposes. Some are more suitable for small-scale networks, while others are designed for large-scale enterprise networks.
-          
-          
-        
-      </description>
+      <guid>http://localhost:1313/post/frr/101-install/</guid>
+      <description>&lt;p&gt;Networking vendors like Cisco, Arista , Juniper have developped their own operating system and all networking engineers had to learn them in order to be relevant when designing, implementing or supporting their own network.&lt;/p&gt;&#xA;&lt;p&gt;Each of these operating systems has its unique features and capabilities, and they are used in different network environments and for different purposes. Some are more suitable for small-scale networks, while others are designed for large-scale enterprise networks.&#xA;It should be noted that most of these Network OS are based on Linux or BSD.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

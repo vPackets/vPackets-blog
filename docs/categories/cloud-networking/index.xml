@@ -2,45 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cloud Networking on Clarity</title>
-    <link>https://blog.vpackets.net/categories/cloud-networking/</link>
+    <link>http://localhost:1313/categories/cloud-networking/</link>
     <description>Recent content in Cloud Networking on Clarity</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Sun, 12 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.vpackets.net/categories/cloud-networking/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Mar 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/cloud-networking/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Create a VPC - Manual</title>
-      <link>https://blog.vpackets.net/post/aws/networking/manual-vpc/</link>
+      <link>http://localhost:1313/post/aws/networking/manual-vpc/</link>
       <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.vpackets.net/post/aws/networking/manual-vpc/</guid>
-      <description>
-        
-          
-            In this blogpost we are going to create a Virtual Private Cloud in Amazon Web Services that will host all the shared services generally deployed by an IT team. Since networking is fundamental to allow communication between servers and computers, every cloud service providers use a dedicated network construct. AWS and Google Cloud call it a VPC, while Azure for example calls it a VNET (virtual network).
-Network constructs are different between cloud providers.
-          
-          
-        
-      </description>
+      <guid>http://localhost:1313/post/aws/networking/manual-vpc/</guid>
+      <description>&lt;p&gt;In this blogpost we are going to create a &lt;a href=&#34;https://docs.aws.amazon.com/vpc/&#34;&gt;Virtual Private Cloud&lt;/a&gt; in &lt;a href=&#34;https://aws.amazon.com/&#34;&gt;Amazon Web Services&lt;/a&gt; that will host all the shared services generally deployed by an IT team.&#xA;Since networking is fundamental to allow communication between servers and computers, every cloud service providers use a dedicated network construct. AWS and Google Cloud call it a VPC, while Azure for example calls it a VNET (virtual network).&lt;/p&gt;&#xA;&lt;p&gt;Network constructs are different between cloud providers. For example, a VPC is global in Google Cloud while it is a regional construct in AWS. This blogpost is not targeted to highlight the networking differences between AWS and GCP (more on that in a dedicated blogpost).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Create a VPC - Automation</title>
-      <link>https://blog.vpackets.net/post/aws/networking/automation-vpc/</link>
+      <link>http://localhost:1313/post/aws/networking/automation-vpc/</link>
       <pubDate>Sat, 11 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.vpackets.net/post/aws/networking/automation-vpc/</guid>
-      <description>
-        
-          
-            In a previous blogpost we managed to manually create a simple VPC that could host several services or traditionnal EC2 instances. This process was quite simple using the AWS console as it would deploy all the network construct within a VPC (Subnets, Route Tables, Internet Gateways etc...)
-I have been deploying network infrastructure (NSX, Cumulus, Cisco ...) for the past few years using Infrastructure as Code and naturally I will show you how to deploy networking cloud constructs related to AWS (not only !
-          
-          
-        
-      </description>
+      <guid>http://localhost:1313/post/aws/networking/automation-vpc/</guid>
+      <description>&lt;p&gt;In a previous blogpost we managed to manually create a simple VPC that could host several services or traditionnal &lt;a href=&#34;https://aws.amazon.com/pm/ec2/&#34;&gt;EC2 instances&lt;/a&gt;.&#xA;This process was quite simple using the AWS console as it would deploy all the network construct within a VPC (Subnets, Route Tables, Internet Gateways etc...)&lt;/p&gt;&#xA;&lt;p&gt;I have been deploying network infrastructure (NSX, Cumulus, Cisco ...) for the past few years using &lt;a href=&#34;https://www.ipspace.net/kb/tag/network-infrastructure-as-code.html&#34;&gt;Infrastructure as Code&lt;/a&gt; and naturally I will show you how to deploy networking cloud constructs related to AWS (not only !) using &lt;a href=&#34;https://cloud.hashicorp.com/products/terraform&#34;&gt;Terraform&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

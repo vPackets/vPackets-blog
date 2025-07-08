@@ -2,11 +2,54 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Clarity</title>
-    <link>https://blog.vpackets.net/tags/</link>
+    <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on Clarity</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 19 Jan 2024 17:33:23 -0600</lastBuildDate><atom:link href="https://blog.vpackets.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 Jan 2024 17:33:23 -0600</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Containerlab</title>
+      <link>http://localhost:1313/tags/containerlab/</link>
+      <pubDate>Fri, 19 Jan 2024 17:33:23 -0600</pubDate>
+      <guid>http://localhost:1313/tags/containerlab/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Networking</title>
+      <link>http://localhost:1313/tags/networking/</link>
+      <pubDate>Fri, 19 Jan 2024 17:33:23 -0600</pubDate>
+      <guid>http://localhost:1313/tags/networking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>FRR</title>
+      <link>http://localhost:1313/tags/frr/</link>
+      <pubDate>Mon, 13 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/frr/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux Networking</title>
+      <link>http://localhost:1313/tags/linux-networking/</link>
+      <pubDate>Mon, 13 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/linux-networking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AWS</title>
+      <link>http://localhost:1313/tags/aws/</link>
+      <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/aws/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VPC</title>
+      <link>http://localhost:1313/tags/vpc/</link>
+      <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/vpc/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
